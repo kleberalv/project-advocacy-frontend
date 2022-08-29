@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -14,56 +15,69 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
-// import Register from './';
-// import { Link } from "react-router-dom";
+import AOS from 'aos';
+import { CardMedia } from '@mui/material';
+import Slides from '../../components/ResponsiveCarousel'
+import aboutUs1 from '../../images/QuemSomos1.png';
+import { makeStyles } from '@mui/styles';
+import Divider from '@mui/material/Divider';
+
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
+      {'Copyright © Developed by: '}
+      <Link color="inherit" href="https://www.linkedin.com/in/kleberalv/">
+        Kleber Alves Bezerera Junior
+      </Link>
+      {' - Sênior Developer '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
   );
 }
 
+const useStyles = makeStyles((theme) => ({
+  media: {
+    height: 0,
+    paddingTop: '56.25%', // 16:9,
+    marginTop:'30'
+  }
+}));
+
+
 const tiers = [
   {
-    title: 'Free',
-    price: '0',
+    title: 'Uma filosofia moderna de gestão juntamente com a tecnologia',
+    subtitle: 'Sedimentado em uma atuação profissional e inovadora',
     description: [
-      '10 users included',
-      '2 GB of storage',
-      'Help center access',
-      'Email support',
+      'A organização do escritório está em consonância com os mais modernos modelos de gestão da advocacia internacional',
+      'segmentado em bancas de atuação, assim como as grandes firmas, que permite atuação com excelência em diversos segmentos',
+      'no ramo do Direito Público e Privado.'
     ],
-    buttonText: 'Sign up for free',
+    buttonText: 'Agende uma reunião',
     buttonVariant: 'outlined',
   },
   {
-    title: 'Pro',
-    subheader: 'Most popular',
-    price: '15',
+    title: 'Pontualidade e seriedade dos compromissos com seus clientes',
+    // subheader: 'Most popular',
+    subtitle: 'O atendimento é realizado por 8 (oito) profissionais.',
     description: [
-      '20 users included',
-      '10 GB of storage',
-      'Help center access',
-      'Priority email support',
+      'Sendo assim, além dos serviços prestados no contencioso jurídico, prestamos assessoria na',
+      'administração de procedimentos jurídicos abrangendo as áreas preventiva e consultiva.',
+      'Venha conosco! Agende uma reunião com nossa equipe jurídica.',
     ],
-    buttonText: 'Get started',
+    buttonText: 'Fale conosco',
     buttonVariant: 'contained',
   },
   {
-    title: 'Enterprise',
-    price: '30',
+    title: 'Agregar valores aos negócios por meio do conjunto de informações',
+    subtitle: 'Acompanhamento processual eficiente e diferenciado',
     description: [
-      '50 users included',
-      '30 GB of storage',
-      'Help center access',
-      'Phone & email support',
+      'Nosso objetivo é agregar valores aos negócios dos clientes por meio do conjunto de informações' ,
+      'fundamentais que obtemos por um acompanhamento processual eficiente e diferenciado, de modo a ',
+      'prestar todo o suporte legal necessário para facilitar a tomada de decisões tempestivas em um ',
+      'mundo tão dinâmico.'
     ],
     buttonText: 'Contact us',
     buttonVariant: 'outlined',
@@ -95,7 +109,16 @@ const footers = [
   },
 ];
 
-function PricingContent() {
+function TelaInicial() {
+
+  useEffect(() => {
+    AOS.init({
+      duration : 2000
+    });
+  }, []);
+
+  const classes = useStyles();
+
   return (
     <React.Fragment>
       <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
@@ -108,7 +131,7 @@ function PricingContent() {
       >
         <Toolbar sx={{ flexWrap: 'wrap' }}>
           <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-            Company name
+            Advocacia Alves Bezerra
           </Typography>
           <nav>
             <Link
@@ -117,7 +140,7 @@ function PricingContent() {
               href="#"
               sx={{ my: 1, mx: 1.5 }}
             >
-              Features
+              Quem sou
             </Link>
             <Link
               variant="button"
@@ -125,7 +148,7 @@ function PricingContent() {
               href="#"
               sx={{ my: 1, mx: 1.5 }}
             >
-              Enterprise
+              Meus trabalhos
             </Link>
             <Link
               variant="button"
@@ -133,7 +156,7 @@ function PricingContent() {
               href="#"
               sx={{ my: 1, mx: 1.5 }}
             >
-              Support
+              Agendar uma reunião
             </Link>
           </nav>
           <Button href="/register" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
@@ -142,7 +165,7 @@ function PricingContent() {
         </Toolbar>
       </AppBar>
       {/* Hero unit */}
-      <Container disableGutters maxWidth="sm" component="main" sx={{ pt: 8, pb: 6 }}>
+      <Container data-aos='fade-up' disableGutters maxWidth="sm" component="main" sx={{ pt: 8, pb: 6 }}>
         <Typography
           component="h1"
           variant="h2"
@@ -159,7 +182,11 @@ function PricingContent() {
         </Typography>
       </Container>
       {/* End hero unit */}
-      <Container maxWidth="md" component="main">
+      <div data-aos="fade-up">
+        <Slides/>
+      </div>
+      <br></br>
+      <Container data-aos="fade-up" maxWidth="md" component="main">
         <Grid container spacing={5} alignItems="flex-end">
           {tiers.map((tier) => (
             // Enterprise card is full width at sm breakpoint
@@ -170,7 +197,7 @@ function PricingContent() {
               sm={tier.title === 'Enterprise' ? 12 : 6}
               md={4}
             >
-              <Card>
+              <Card style={{minHeight: 700}}>
                 <CardHeader
                   title={tier.title}
                   subheader={tier.subheader}
@@ -195,12 +222,18 @@ function PricingContent() {
                       mb: 2,
                     }}
                   >
-                    <Typography component="h2" variant="h3" color="text.primary">
-                      ${tier.price}
+                    {/* <CardMedia
+                      className={classes.media}
+                      image={aboutUs1} // require image
+                      title="Contemplative Reptile"
+                    /> */}
+                    <Typography color="text.secondary">
+                      {tier.subtitle}
+                      <Divider/>
                     </Typography>
-                    <Typography variant="h6" color="text.secondary">
+                    {/* <Typography variant="h6" color="text.secondary">
                       /mo
-                    </Typography>
+                    </Typography> */}
                   </Box>
                   <ul>
                     {tier.description.map((line) => (
@@ -215,10 +248,10 @@ function PricingContent() {
                     ))}
                   </ul>
                 </CardContent>
-                <CardActions>
-                  <Button fullWidth variant={tier.buttonVariant}>
-                    {tier.buttonText}
-                  </Button>
+                <CardActions style={{position: 'absolute', bottom:'10px'}}>
+                    <Button variant={tier.buttonVariant}>
+                      {tier.buttonText}
+                    </Button>
                 </CardActions>
               </Card>
             </Grid>
@@ -235,7 +268,7 @@ function PricingContent() {
           py: [3, 6],
         }}
       >
-        <Grid container spacing={4} justifyContent="space-evenly">
+        <Grid container data-aos="fade-down" spacing={4} justifyContent="space-evenly">
           {footers.map((footer) => (
             <Grid item xs={6} sm={3} key={footer.title}>
               <Typography variant="h6" color="text.primary" gutterBottom>
@@ -261,5 +294,5 @@ function PricingContent() {
 }
 
 export default function Index() {
-  return <PricingContent />;
+  return <TelaInicial />;
 }
