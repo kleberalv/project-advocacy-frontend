@@ -24,6 +24,10 @@
   color: white;
 }
 
+.Body {
+  background-image: url("./images/Back.jpg");
+}
+
 .App-link {
   color: #61dafb;
 }

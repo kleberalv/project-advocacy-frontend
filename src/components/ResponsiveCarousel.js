@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
-import slide1 from '../images/Slide1.jpg';
-import slide2 from '../images/Slide2.jpg';
-import slide3 from '../images/Slide3.jpg';
+import slide1 from '../images/Slide1.png';
+import slide2 from '../images/Slide2.png';
+import slide3 from '../images/Slide3.png';
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles((theme) => ({

@@ -67,7 +67,7 @@ const tiers = [
       'administração de procedimentos jurídicos abrangendo as áreas preventiva e consultiva.',
       'Venha conosco! Agende uma reunião com nossa equipe jurídica.',
     ],
-    buttonText: 'Fale conosco',
+    buttonText: 'Agende uma reunião',
     buttonVariant: 'contained',
   },
   {
@@ -79,7 +79,7 @@ const tiers = [
       'prestar todo o suporte legal necessário para facilitar a tomada de decisões tempestivas em um ',
       'mundo tão dinâmico.'
     ],
-    buttonText: 'Contact us',
+    buttonText: 'Agende uma reunião',
     buttonVariant: 'outlined',
   },
 ];
@@ -129,14 +129,20 @@ function TelaInicial() {
         elevation={0}
         sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
       >
-        <Toolbar sx={{ flexWrap: 'wrap' }}>
-          <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
+        <Toolbar style={{backgroundColor:'#2c2c2c'}} sx={{ flexWrap: 'wrap' }}>
+          <Typography 
+            variant="h6" 
+            // color="inherit"
+            style={{color:'#FFFFFF'}} 
+            noWrap sx={{ flexGrow: 1 }}
+          >
             Advocacia Alves Bezerra
           </Typography>
           <nav>
             <Link
               variant="button"
-              color="text.primary"
+              // color="text.primary"
+              style={{color:'#FFFFFF'}}
               href="#"
               sx={{ my: 1, mx: 1.5 }}
             >
@@ -144,7 +150,8 @@ function TelaInicial() {
             </Link>
             <Link
               variant="button"
-              color="text.primary"
+              // color="text.secondary"
+              style={{color:'#FFFFFF'}} 
               href="#"
               sx={{ my: 1, mx: 1.5 }}
             >
@@ -152,14 +159,15 @@ function TelaInicial() {
             </Link>
             <Link
               variant="button"
-              color="text.primary"
+              // color="text.secondary"
+              style={{color:'#FFFFFF'}} 
               href="#"
               sx={{ my: 1, mx: 1.5 }}
             >
               Agendar uma reunião
             </Link>
           </nav>
-          <Button href="/register" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+          <Button href="/register" style={{color:'#B08836'}} variant="outlined" sx={{ my: 1, mx: 1.5 }}>
             Login
           </Button>
         </Toolbar>
@@ -173,12 +181,12 @@ function TelaInicial() {
           color="text.primary"
           gutterBottom
         >
-          Pricing
+          Advocacia Alves Bezerra
         </Typography>
         <Typography variant="h5" align="center" color="text.secondary" component="p">
-          Quickly build an effective pricing table for your potential customers with
-          this layout. It&apos;s built with default MUI components with little
-          customization.
+          {'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nisi odio, condimentum eu pulvinar sed, dapibus euismod ipsum.'}
+          {'Etiam finibus imperdiet pulvinar. In vel massa pretium, finibus ex scelerisque, lobortis elit. Sed egestas, mi id congue iaculis,'}
+          {'magna eros dictum tellus, et sagittis dolor purus in orci. Duis at tortor quis est facilisis luctus nec in nulla.'}
         </Typography>
       </Container>
       {/* End hero unit */}
@@ -248,10 +256,12 @@ function TelaInicial() {
                     ))}
                   </ul>
                 </CardContent>
-                <CardActions style={{position: 'absolute', bottom:'10px'}}>
+                <CardActions style={{position: 'absolute', bottom:'10px', width: '258px'}}>
+                  <div style={{width: '240px', textAlign: 'center'}}>
                     <Button variant={tier.buttonVariant}>
                       {tier.buttonText}
                     </Button>
+                  </div>
                 </CardActions>
               </Card>
             </Grid>

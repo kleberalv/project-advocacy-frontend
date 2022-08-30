@@ -1,24 +1,16 @@
 import React from 'react';
 import './App.css';
 import RoutesApp from './routesApp';
+// import logo from './images/icone.png';
 
 function App() {
   return (
-    <RoutesApp />
+    <div className="Body">
+      <RoutesApp/>
+    </div>
     // <div className="App">
     //   <header className="App-header">
     //     <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       Edit <code>src/App.js</code> and save to reload.
-    //     </p>
-    //     <a
-    //       className="App-link"
-    //       href="https://reactjs.org"
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       Learn React
-    //     </a>
     //   </header>
     // </div>
   );
