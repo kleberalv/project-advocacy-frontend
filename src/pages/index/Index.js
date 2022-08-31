@@ -3,25 +3,19 @@ import { useEffect } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardHeader from '@mui/material/CardHeader';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
-import StarIcon from '@mui/icons-material/StarBorder';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
 import AOS from 'aos';
-import { CardMedia } from '@mui/material';
 import Slides from '../../components/ResponsiveCarousel'
-import aboutUs1 from '../../images/QuemSomos1.png';
+import Chat from '../../images/Chat.png';
 import { makeStyles } from '@mui/styles';
-import Divider from '@mui/material/Divider';
-
+import FloatingWhatsApp from 'react-floating-whatsapp';
+import ResponsiveCards from '../../components/ResponsiveCards';
 
 function Copyright(props) {
   return (
@@ -39,9 +33,9 @@ function Copyright(props) {
 
 const useStyles = makeStyles((theme) => ({
   media: {
-    height: 0,
+    height: 10,
     paddingTop: '56.25%', // 16:9,
-    marginTop:'30'
+    marginTop: '30'
   }
 }));
 
@@ -74,7 +68,7 @@ const tiers = [
     title: 'Agregar valores aos negócios por meio do conjunto de informações',
     subtitle: 'Acompanhamento processual eficiente e diferenciado',
     description: [
-      'Nosso objetivo é agregar valores aos negócios dos clientes por meio do conjunto de informações' ,
+      'Nosso objetivo é agregar valores aos negócios dos clientes por meio do conjunto de informações',
       'fundamentais que obtemos por um acompanhamento processual eficiente e diferenciado, de modo a ',
       'prestar todo o suporte legal necessário para facilitar a tomada de decisões tempestivas em um ',
       'mundo tão dinâmico.'
@@ -113,14 +107,25 @@ function TelaInicial() {
 
   useEffect(() => {
     AOS.init({
-      duration : 2000
+      duration: 2000
     });
   }, []);
 
   const classes = useStyles();
 
   return (
+
     <React.Fragment>
+      <Box style={{ width: "60px", height: "60px", borderRadius: "40px", position: "fixed", bottom: "60px", right: "10px", zIndex: "9999" }} >
+        <FloatingWhatsApp
+          phoneNumber='+55(61) 98452-3149'
+          accountName='Adv Kleber Alves'
+          statusMessage='Disponível de Segunda a Sábado, entre 09hrs e 18hrs'
+          chatMessage='Olá, como posso ajudar?'
+          placeholder='Mensagem:'
+          avatar={Chat}
+        />
+      </Box>
       <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
       <CssBaseline />
       <AppBar
@@ -129,11 +134,11 @@ function TelaInicial() {
         elevation={0}
         sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
       >
-        <Toolbar style={{backgroundColor:'#2c2c2c'}} sx={{ flexWrap: 'wrap' }}>
-          <Typography 
-            variant="h6" 
+        <Toolbar style={{ backgroundColor: '#2c2c2c' }} sx={{ flexWrap: 'wrap' }}>
+          <Typography
+            variant="h6"
             // color="inherit"
-            style={{color:'#FFFFFF'}} 
+            style={{ color: '#FFFFFF' }}
             noWrap sx={{ flexGrow: 1 }}
           >
             Advocacia Alves Bezerra
@@ -142,7 +147,7 @@ function TelaInicial() {
             <Link
               variant="button"
               // color="text.primary"
-              style={{color:'#FFFFFF'}}
+              style={{ color: '#FFFFFF' }}
               href="#"
               sx={{ my: 1, mx: 1.5 }}
             >
@@ -151,7 +156,7 @@ function TelaInicial() {
             <Link
               variant="button"
               // color="text.secondary"
-              style={{color:'#FFFFFF'}} 
+              style={{ color: '#FFFFFF' }}
               href="#"
               sx={{ my: 1, mx: 1.5 }}
             >
@@ -160,14 +165,14 @@ function TelaInicial() {
             <Link
               variant="button"
               // color="text.secondary"
-              style={{color:'#FFFFFF'}} 
+              style={{ color: '#FFFFFF' }}
               href="#"
               sx={{ my: 1, mx: 1.5 }}
             >
               Agendar uma reunião
             </Link>
           </nav>
-          <Button href="/register" style={{color:'#B08836'}} variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+          <Button href="/register" style={{ color: '#B08836' }} variant="outlined" sx={{ my: 1, mx: 1.5 }}>
             Login
           </Button>
         </Toolbar>
@@ -190,84 +195,31 @@ function TelaInicial() {
         </Typography>
       </Container>
       {/* End hero unit */}
+
+      {/* Slides */}
       <div data-aos="fade-up">
-        <Slides/>
+        <Slides />
       </div>
       <br></br>
-      <Container data-aos="fade-up" maxWidth="md" component="main">
-        <Grid container spacing={5} alignItems="flex-end">
-          {tiers.map((tier) => (
-            // Enterprise card is full width at sm breakpoint
-            <Grid
-              item
-              key={tier.title}
-              xs={12}
-              sm={tier.title === 'Enterprise' ? 12 : 6}
-              md={4}
-            >
-              <Card style={{minHeight: 700}}>
-                <CardHeader
-                  title={tier.title}
-                  subheader={tier.subheader}
-                  titleTypographyProps={{ align: 'center' }}
-                  action={tier.title === 'Pro' ? <StarIcon /> : null}
-                  subheaderTypographyProps={{
-                    align: 'center',
-                  }}
-                  sx={{
-                    backgroundColor: (theme) =>
-                      theme.palette.mode === 'light'
-                        ? theme.palette.grey[200]
-                        : theme.palette.grey[700],
-                  }}
-                />
-                <CardContent>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'baseline',
-                      mb: 2,
-                    }}
-                  >
-                    {/* <CardMedia
-                      className={classes.media}
-                      image={aboutUs1} // require image
-                      title="Contemplative Reptile"
-                    /> */}
-                    <Typography color="text.secondary">
-                      {tier.subtitle}
-                      <Divider/>
-                    </Typography>
-                    {/* <Typography variant="h6" color="text.secondary">
-                      /mo
-                    </Typography> */}
-                  </Box>
-                  <ul>
-                    {tier.description.map((line) => (
-                      <Typography
-                        component="li"
-                        variant="subtitle1"
-                        align="center"
-                        key={line}
-                      >
-                        {line}
-                      </Typography>
-                    ))}
-                  </ul>
-                </CardContent>
-                <CardActions style={{position: 'absolute', bottom:'10px', width: '258px'}}>
-                  <div style={{width: '240px', textAlign: 'center'}}>
-                    <Button variant={tier.buttonVariant}>
-                      {tier.buttonText}
-                    </Button>
-                  </div>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
+
+      {/* Cards */}
+      <ResponsiveCards />
+
+      {/* <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
+        <iframe
+          item
+          width="100%"
+          height="600"
+          id="gmap_canvas"
+          src="https://maps.google.com/maps?q=CECAD%20-%20Presid%C3%AAncia%20da%20Rep%C3%BAblica&t=&z=13&ie=UTF8&iwloc=&output=embed"
+          frameborder="0"
+          scrolling="no"
+          marginheight="0"
+          marginwidth="0">
+        </iframe>
+      </Grid> */}
+
+
       {/* Footer */}
       <Container
         maxWidth="md"
