@@ -11,11 +11,14 @@ import Link from '@mui/material/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
 import AOS from 'aos';
-import Slides from '../../components/ResponsiveCarousel'
-import Chat from '../../images/Chat.png';
+import ResponsiveCarousel from '../../components/ResponsiveCarousel'
 import { makeStyles } from '@mui/styles';
-import FloatingWhatsApp from 'react-floating-whatsapp';
 import ResponsiveCards from '../../components/ResponsiveCards';
+import Whatsapp from '../../components/WhatsAppButton';
+import PrincipalImage from '../../images/Chat.png';
+import QuemSomos1 from '../../images/QuemSomos1.png';
+import QuemSomos2 from '../../images/QuemSomos2.png';
+import QuemSomos3 from '../../images/QuemSomos3.png';
 
 function Copyright(props) {
   return (
@@ -39,39 +42,38 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
 const tiers = [
   {
+    image: QuemSomos1,
     title: 'Uma filosofia moderna de gestão juntamente com a tecnologia',
-    subtitle: 'Sedimentado em uma atuação profissional e inovadora',
+    subtitle: 'Sedimentado em uma atuação profissional, inovadora e dinâmica.',
     description: [
-      'A organização do escritório está em consonância com os mais modernos modelos de gestão da advocacia internacional',
-      'segmentado em bancas de atuação, assim como as grandes firmas, que permite atuação com excelência em diversos segmentos',
-      'no ramo do Direito Público e Privado.'
+      'A organização do escritório está em consonância com os mais modernos modelos de gestão da advocacia internacional, ',
+      'segmentado em bancas de atuação, assim como as grandes firmas, que permite uma excelente atuação.'
     ],
     buttonText: 'Agende uma reunião',
     buttonVariant: 'outlined',
   },
   {
+    image: QuemSomos2,
     title: 'Pontualidade e seriedade dos compromissos com seus clientes',
     // subheader: 'Most popular',
-    subtitle: 'O atendimento é realizado por 8 (oito) profissionais.',
+    subtitle: 'O atendimento é realizado por até 8 (oito) profissionais capacitados na área de atuação.',
     description: [
-      'Sendo assim, além dos serviços prestados no contencioso jurídico, prestamos assessoria na',
+      'Sendo assim, além dos serviços prestados no contencioso jurídico, prestamos assessoria na ',
       'administração de procedimentos jurídicos abrangendo as áreas preventiva e consultiva.',
-      'Venha conosco! Agende uma reunião com nossa equipe jurídica.',
+      'Agende uma reunião com nossa equipe jurídica.',
     ],
     buttonText: 'Agende uma reunião',
     buttonVariant: 'contained',
   },
   {
+    image: QuemSomos3,
     title: 'Agregar valores aos negócios por meio do conjunto de informações',
     subtitle: 'Acompanhamento processual eficiente e diferenciado',
     description: [
-      'Nosso objetivo é agregar valores aos negócios dos clientes por meio do conjunto de informações',
-      'fundamentais que obtemos por um acompanhamento processual eficiente e diferenciado, de modo a ',
-      'prestar todo o suporte legal necessário para facilitar a tomada de decisões tempestivas em um ',
-      'mundo tão dinâmico.'
+      'Nosso objetivo é agregar valores aos negócios dos clientes por meio do conjunto de informações fundamentais que',
+      'obtemos por um acompanhamento processual eficiente e diferenciado, de modo a prestar todo o suporte legal necessário.',
     ],
     buttonText: 'Agende uma reunião',
     buttonVariant: 'outlined',
@@ -116,18 +118,15 @@ function TelaInicial() {
   return (
 
     <React.Fragment>
-      <Box style={{ width: "60px", height: "60px", borderRadius: "40px", position: "fixed", bottom: "60px", right: "10px", zIndex: "9999" }} >
-        <FloatingWhatsApp
-          phoneNumber='+55(61) 98452-3149'
-          accountName='Adv Kleber Alves'
-          statusMessage='Disponível de Segunda a Sábado, entre 09hrs e 18hrs'
-          chatMessage='Olá, como posso ajudar?'
-          placeholder='Mensagem:'
-          avatar={Chat}
-        />
-      </Box>
+
       <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
       <CssBaseline />
+
+      {/* Botão flutuante do Whatsapp */}
+      <Whatsapp />
+
+      {/* Menu do sistema */}
+
       <AppBar
         position="static"
         color="default"
@@ -135,13 +134,24 @@ function TelaInicial() {
         sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
       >
         <Toolbar style={{ backgroundColor: '#2c2c2c' }} sx={{ flexWrap: 'wrap' }}>
+          <a style={{ marginTop: '8px' }} href="/">
+            <img style={{ height: '50px' }} src={PrincipalImage} className="image-container" />
+          </a>
           <Typography
             variant="h6"
             // color="inherit"
-            style={{ color: '#FFFFFF' }}
+            style={{ marginLeft: '5px', color: '#BC953D' }}
             noWrap sx={{ flexGrow: 1 }}
           >
-            Advocacia Alves Bezerra
+            <Link
+              variant="h6"
+              // color="text.secondary"
+              style={{ color: '#BC953D', textDecoration: 'none' }}
+              href="/"
+              sx={{ my: 1, mx: 1.5 }}
+            >
+              Advocacia Alves Bezerra
+            </Link>
           </Typography>
           <nav>
             <Link
@@ -177,33 +187,49 @@ function TelaInicial() {
           </Button>
         </Toolbar>
       </AppBar>
-      {/* Hero unit */}
-      <Container data-aos='fade-up' disableGutters maxWidth="sm" component="main" sx={{ pt: 8, pb: 6 }}>
-        <Typography
-          component="h1"
-          variant="h2"
-          align="center"
-          color="text.primary"
-          gutterBottom
-        >
-          Advocacia Alves Bezerra
-        </Typography>
-        <Typography variant="h5" align="center" color="text.secondary" component="p">
-          {'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nisi odio, condimentum eu pulvinar sed, dapibus euismod ipsum.'}
-          {'Etiam finibus imperdiet pulvinar. In vel massa pretium, finibus ex scelerisque, lobortis elit. Sed egestas, mi id congue iaculis,'}
-          {'magna eros dictum tellus, et sagittis dolor purus in orci. Duis at tortor quis est facilisis luctus nec in nulla.'}
-        </Typography>
-      </Container>
-      {/* End hero unit */}
+
+      {/* Início do site */}
+
+      <Grid container style={{ backgroundColor: '#111736', color: '#BC953D' }} data-aos='fade-up' component="main" sx={{ pt: 8, pb: 6 }}>
+        <Grid item xs={12} sm={12}>
+          <Typography
+            component="h1"
+            variant="h2"
+            align="center"
+            // color="text.primary"
+            gutterBottom
+          >
+            Advocacia Alves Bezerra
+          </Typography>
+        </Grid>
+
+        <div className="vitrine"></div>
+
+        <Grid item align="justify" xs={12} sm={2}>
+        </Grid>
+        <Grid item align="justify" xs={12} sm={5}>
+          <Typography style={{ marginTop: '50px', marginLeft: '25px', marginRight: '25px' }} variant="h5" color="#FFFFFF" component="p">
+            {'Profissionalismo liberal, graduado em direito e autorizado pelas instituições competentes de cada país a exercer o jus postulandi, ou'}
+            {' seja, a representação dos legítimos interesses das pessoas físicas ou jurídicas em juízo ou fora dele, quer entre si, quer ante o Estado.'}
+          </Typography>
+        </Grid>
+
+        <Grid item align="center" xs={12} sm={5} style={{ marginTop: '20px' }}>
+          <img src={PrincipalImage} className="image-container" />
+        </Grid>
+
+        <div className="vitrine"></div>
+      </Grid>
 
       {/* Slides */}
       <div data-aos="fade-up">
-        <Slides />
+        <ResponsiveCarousel />
       </div>
-      <br></br>
 
       {/* Cards */}
-      <ResponsiveCards />
+      <ResponsiveCards
+        props={tiers}
+      />
 
       {/* <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
         <iframe
@@ -250,7 +276,8 @@ function TelaInicial() {
         </Grid>
         <Copyright sx={{ mt: 5 }} />
       </Container>
-      {/* End footer */}
+
+
     </React.Fragment>
   );
 }

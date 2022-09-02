@@ -8,39 +8,47 @@ import slide3 from '../images/Slide3.png';
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles((theme) => ({
-    slideCss:{
-        height:'450px',
-        width:'100px'
+    slideCss: {
+        height: '450px',
+        width: '100px'
     },
-    carouselCss:{
+    carouselCss: {
+        marginTop:'10px',
         marginRight: '20px',
         marginLeft: '20px'
     }
 }));
 
-    function Slides(){
-        const classes = useStyles();
-        return (
-            <Carousel autoPlay={true} infiniteLoop={true} animationDuration={10} showArrows={true} showThumbs={false} className={classes.carouselCss}>
-                <div>
-                    <img src={slide1} className={classes.slideCss} />
-                    {/* <p className="legend">Legend 1</p> */}
-                </div>
-                <div>
-                    <img src={slide2} className={classes.slideCss} />
-                    {/* <p className="legend">Legend 2</p> */}
-                </div>
-                <div>
-                    <img src={slide3} className={classes.slideCss} />
-                    {/* <p className="legend">Legend 3</p> */}
-                </div>
-            </Carousel>
-        );
-    }
+function Slides() {
+    const classes = useStyles();
+    return (
+        <Carousel
+            autoPlay={true}
+            infiniteLoop={true}
+            animationDuration={10}
+            showArrows={true}
+            showThumbs={false}
+            className={classes.carouselCss}
+        >
+            <div>
+                <img src={slide1} className={classes.slideCss} />
+                {/* <p className="legend">Legend 1</p> */}
+            </div>
+            <div>
+                <img src={slide2} className={classes.slideCss} />
+                {/* <p className="legend">Legend 2</p> */}
+            </div>
+            <div>
+                <img src={slide3} className={classes.slideCss} />
+                {/* <p className="legend">Legend 3</p> */}
+            </div>
+        </Carousel>
+    );
+}
 
 // ReactDOM.render(<DemoCarousel />, document.querySelector('.demo-carousel'));
 
-export default function ResponsiveCarousel(){
+export default function ResponsiveCarousel() {
     return Slides();
 }
 
