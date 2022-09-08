@@ -4,8 +4,6 @@ import Index from './pages/index/Index'
 import Login from './pages/login/Login'
 import NotFound from './pages/theme/NotFound'
 import Register from './pages/register/Register'
-import LinearProgress from '@mui/material/LinearProgress';
-
 
 function RoutesApp() {
     return (
