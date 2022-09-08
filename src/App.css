@@ -29,6 +29,10 @@
   /* background-color: #111736; */
 }
 
+.BackgroundImageUsers {
+  background-image: url("./images/Slide1.png");
+}
+
 .vitrine { 
   height: 0px; 
   width: 100%; 

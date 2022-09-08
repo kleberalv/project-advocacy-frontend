@@ -1,11 +1,7 @@
 import * as React from 'react';
 import { useEffect } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
@@ -19,20 +15,8 @@ import PrincipalImage from '../../images/Chat.png';
 import QuemSomos1 from '../../images/QuemSomos1.png';
 import QuemSomos2 from '../../images/QuemSomos2.png';
 import QuemSomos3 from '../../images/QuemSomos3.png';
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © Developed by: '}
-      <Link color="inherit" href="https://www.linkedin.com/in/kleberalv/">
-        Kleber Alves Bezerera Junior
-      </Link>
-      {' - Sênior Developer '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import Copyright from '../theme/Copyright';
+import Navbar from '../theme/Navbar'
 
 const useStyles = makeStyles((theme) => ({
   media: {
@@ -127,66 +111,7 @@ function TelaInicial() {
 
       {/* Menu do sistema */}
 
-      <AppBar
-        position="static"
-        color="default"
-        elevation={0}
-        sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
-      >
-        <Toolbar style={{ backgroundColor: '#2c2c2c' }} sx={{ flexWrap: 'wrap' }}>
-          <a style={{ marginTop: '8px' }} href="/">
-            <img style={{ height: '50px' }} src={PrincipalImage} className="image-container" />
-          </a>
-          <Typography
-            variant="h6"
-            // color="inherit"
-            style={{ marginLeft: '5px', color: '#BC953D' }}
-            noWrap sx={{ flexGrow: 1 }}
-          >
-            <Link
-              variant="h6"
-              // color="text.secondary"
-              style={{ color: '#BC953D', textDecoration: 'none' }}
-              href="/"
-              sx={{ my: 1, mx: 1.5 }}
-            >
-              Advocacia Alves Bezerra
-            </Link>
-          </Typography>
-          <nav>
-            <Link
-              variant="button"
-              // color="text.primary"
-              style={{ color: '#FFFFFF' }}
-              href="#"
-              sx={{ my: 1, mx: 1.5 }}
-            >
-              Quem sou
-            </Link>
-            <Link
-              variant="button"
-              // color="text.secondary"
-              style={{ color: '#FFFFFF' }}
-              href="#"
-              sx={{ my: 1, mx: 1.5 }}
-            >
-              Meus trabalhos
-            </Link>
-            <Link
-              variant="button"
-              // color="text.secondary"
-              style={{ color: '#FFFFFF' }}
-              href="#"
-              sx={{ my: 1, mx: 1.5 }}
-            >
-              Agendar uma reunião
-            </Link>
-          </nav>
-          <Button href="/register" style={{ color: '#B08836' }} variant="outlined" sx={{ my: 1, mx: 1.5 }}>
-            Login
-          </Button>
-        </Toolbar>
-      </AppBar>
+      <Navbar />
 
       {/* Início do site */}
 
@@ -276,7 +201,6 @@ function TelaInicial() {
         </Grid>
         <Copyright sx={{ mt: 5 }} />
       </Container>
-
 
     </React.Fragment>
   );

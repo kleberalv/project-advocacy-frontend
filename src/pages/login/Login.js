@@ -48,10 +48,8 @@ export default function SignInSide() {
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
-              marginTop: 1,
-              marginLeft: 4,
-              marginRight: 4,
-              marginBottom: 1,
+              my: 3,
+              mx: 4,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
@@ -61,75 +59,55 @@ export default function SignInSide() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Cadastre-se
+              Área de membros
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    autoComplete="given-name"
-                    name="firstName"
-                    required
-                    fullWidth
-                    id="firstName"
-                    label="Nome"
-                    autoFocus
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="lastName"
-                    label="Sobrenome"
-                    name="lastName"
-                    autoComplete="family-name"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="email"
-                    label="E-mail"
-                    name="email"
-                    autoComplete="email"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    name="password"
-                    label="Senha"
-                    type="password"
-                    id="password"
-                    autoComplete="new-password"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <FormControlLabel
-                    control={<Checkbox value="allowExtraEmails" color="primary" />}
-                    label="Autorizo receber informações via e-mail"
-                  />
-                </Grid>
-              </Grid>
+            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="E-mail"
+                name="email"
+                autoComplete="email"
+                autoFocus
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Senha"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+              />
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Lembrar-me"
+              />
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign Up
+                Entrar
               </Button>
-              <Grid container justifyContent="flex-end">
+              <Grid container>
+                <Grid item xs>
+                  <Link style={{ textDecoration: 'none' }} href="#" variant="body2">
+                    Esqueceu a senha?
+                  </Link>
+                </Grid>
                 <Grid item>
-                  <Link href="/login" variant="body2">
-                    Já possui uma conta? Realizar login
+                  {'Não possui conta?'}
+                  <Link style={{ textDecoration: 'none' }} href="/register" variant="body2">
+                    {" Cadastre-se"}
                   </Link>
                 </Grid>
               </Grid>
-              <Grid style={{ marginTop: '20px' }}>
+              <Grid style={{ marginTop: '50px', marginBottom: '13px' }}>
                 <Copyright />
               </Grid>
             </Box>
