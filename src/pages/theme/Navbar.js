@@ -48,7 +48,7 @@ function Navbar() {
                         variant="button"
                         // color="text.primary"
                         style={{ color: '#FFFFFF', textDecoration: 'none' }}
-                        href="#"
+                        href="#id1"
                         sx={{ my: 1, mx: 1.5 }}
                     >
                         Quem sou
@@ -57,19 +57,19 @@ function Navbar() {
                         variant="button"
                         // color="text.secondary"
                         style={{ color: '#FFFFFF', textDecoration: 'none' }}
-                        href="#"
+                        href="#id2"
                         sx={{ my: 1, mx: 1.5 }}
                     >
-                        Meus trabalhos
+                        Local
                     </Link>
                     <Link
                         variant="button"
                         // color="text.secondary"
                         style={{ color: '#FFFFFF', textDecoration: 'none' }}
-                        href="#"
+                        href="#id3"
                         sx={{ my: 1, mx: 1.5 }}
                     >
-                        Agendar uma reunião
+                        Meus trabalhos
                     </Link>
                 </nav>
                 <Button href="/login" style={{ color: '#B08836' }} variant="outlined" sx={{ my: 1, mx: 1.5 }}>

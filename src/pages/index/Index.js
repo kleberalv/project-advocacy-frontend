@@ -17,6 +17,7 @@ import QuemSomos2 from '../../images/QuemSomos2.png';
 import QuemSomos3 from '../../images/QuemSomos3.png';
 import Copyright from '../theme/Copyright';
 import Navbar from '../theme/Navbar'
+import Paper from '@mui/material/Paper';
 
 const useStyles = makeStyles((theme) => ({
   media: {
@@ -152,24 +153,99 @@ function TelaInicial() {
       </div>
 
       {/* Cards */}
-      <ResponsiveCards
-        props={tiers}
-      />
+      <div data-aos="fade-up" data-aos-duration="3000">
+        <div>
+          <ResponsiveCards
+            props={tiers}
+          />
+        </div>
+      </div>
 
-      {/* <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
-        <iframe
-          item
-          width="100%"
-          height="600"
-          id="gmap_canvas"
-          src="https://maps.google.com/maps?q=CECAD%20-%20Presid%C3%AAncia%20da%20Rep%C3%BAblica&t=&z=13&ie=UTF8&iwloc=&output=embed"
-          frameborder="0"
-          scrolling="no"
-          marginheight="0"
-          marginwidth="0">
-        </iframe>
-      </Grid> */}
+      {/* Local */}
+      <br></br>
+      <div id='id2' data-aos="fade-up-right">
+        <Grid style={{ backgroundColor: '#E9ECEF', color: '#111736' }}>
+          <Typography
 
+            component="h1"
+            variant="h2"
+            align="center"
+            // color="text.primary"
+            gutterBottom
+          >
+            Como chegar
+          </Typography>
+          <Grid marginTop={2} container spacing={1} style={{ color: '#BC953D' }}>
+            <Grid item xs={12} sm={12} md={12} lg={0.8} xl={0.8} />
+
+            <Grid item xs={12} sm={12} md={12} lg={6} xl={7}>
+              <Paper >
+                <iframe
+                  item
+                  width="100%"
+                  height="450"
+                  id="gmap_canvas"
+                  src="https://maps.google.com/maps?q=CECAD%20-%20Presid%C3%AAncia%20da%20Rep%C3%BAblica&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                  scrolling="no">
+                </iframe>
+              </Paper>
+            </Grid>
+
+            <Grid item xs={12} sm={12} md={12} lg={5} xl={4}>
+              <Paper >
+                <Typography variant="h5" component="p" style={{ marginLeft: '20px' }}>
+                  {'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan blandit lectus, non luctus orci bibendum ut. '}
+                  {'Vestibulum laoreet sem id eros sagittis, nec elementum felis finibus. Vestibulum ante ipsum primis in faucibus orci luctus'}
+                  {'et ultrices posuere cubilia curae; Mauris tincidunt at ipsum posuere tincidunt. In ultrices, diam vel dignissim malesuada, '}
+                  {'libero augue pellentesque enim, non venenatis diam tortor ac tellus. Curabitur vitae neque et metus consequat laoreet vitae '}
+                  {'non eros. Aenean pharetra ultrices risus, nec rhoncus enim malesuada non. Nam faucibus risus elementum sem mollis tincidunt. '}
+                  {'Curabitur vitae augue vel tere molestie sed ipsum.'}
+                </Typography>
+              </Paper>
+            </Grid>
+
+            <div className="vitrine"></div>
+          </Grid>
+        </Grid>
+      </div>
+
+      {/* Meus trabalhos */}
+      <div id='id3' data-aos="zoom-in-up">
+        <Grid style={{ backgroundColor: '#E9ECEF', color: '#111736' }}>
+          <Typography
+
+            component="h1"
+            variant="h2"
+            align="center"
+            // color="text.primary"
+            gutterBottom
+          >
+            Meus trabalhos
+          </Typography>
+          <Grid marginTop={2} container spacing={1} style={{ color: '#BC953D' }}>
+            <Grid item xs={12} sm={12} md={12} lg={0.8} xl={0.8} />
+
+            <Grid item xs={12} sm={12} md={12} lg={10.5} xl={10.5}>
+              <Paper >
+                <Typography variant="h5" component="p" style={{ marginLeft: '20px' }}>
+                  {'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan blandit lectus, non luctus orci bibendum ut. '}
+                  {'Vestibulum laoreet sem id eros sagittis, nec elementum felis finibus. Vestibulum ante ipsum primis in faucibus orci luctus'}
+                  {'et ultrices posuere cubilia curae; Mauris tincidunt at ipsum posuere tincidunt. In ultrices, diam vel dignissim malesuada, '}
+                  {'libero augue pellentesque enim, non venenatis diam tortor ac tellus. Curabitur vitae neque et metus consequat laoreet vitae '}
+                  {'non eros. Aenean pharetra ultrices risus, nec rhoncus enim malesuada non. Nam faucibus risus elementum sem mollis tincidunt. '}
+                  {'Curabitur vitae augue vel tere molestie sed ipsum.'}
+                </Typography>
+
+              </Paper>
+            </Grid>
+
+            <Grid item xs={12} sm={12} md={12} lg={0.8} xl={0.8} />
+
+            <div className="vitrine"></div>
+
+          </Grid>
+        </Grid>
+      </div>
 
       {/* Footer */}
       <Container
@@ -202,7 +278,7 @@ function TelaInicial() {
         <Copyright sx={{ mt: 5 }} />
       </Container>
 
-    </React.Fragment>
+    </React.Fragment >
   );
 }
 

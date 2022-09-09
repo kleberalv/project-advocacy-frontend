@@ -45,7 +45,7 @@ function ResponsiveCards(props) {
         <>
 
             <Grid style={{marginTop:'25px'}}>
-                <Container data-aos="fade-up" component="main">
+                <Container component="main">
                     <Grid container spacing={1} alignItems='flex-end'>
                         {
                             dados.map((tier, key) => (

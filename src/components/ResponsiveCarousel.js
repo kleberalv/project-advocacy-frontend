@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import slide1 from '../images/Slide1.png';
@@ -12,10 +11,14 @@ const useStyles = makeStyles((theme) => ({
         height: '450px',
         width: '100px'
     },
+    slideCssMobile: {
+        height: '300px',
+        width: '100px'
+    },
     carouselCss: {
-        marginTop:'10px',
-        marginRight: '20px',
-        marginLeft: '20px'
+        marginTop: '0px',
+        marginRight: '0px',
+        marginLeft: '0px'
     }
 }));
 
@@ -31,16 +34,28 @@ function Slides() {
             className={classes.carouselCss}
         >
             <div>
-                <img src={slide1} className={classes.slideCss} />
-                {/* <p className="legend">Legend 1</p> */}
+                {window.screen.width >= '600' ?
+                    <img src={slide1} className={classes.slideCss} />
+                    :
+                    <img src={slide1} className={classes.slideCssMobile} />
+                }
+                <p className="legend">Agende uma reunião e tire suas dúvidas</p>
             </div>
             <div>
-                <img src={slide2} className={classes.slideCss} />
-                {/* <p className="legend">Legend 2</p> */}
+                {window.screen.width >= '600' ?
+                    <img src={slide2} className={classes.slideCss} />
+                    :
+                    <img src={slide2} className={classes.slideCssMobile} />
+                }
+                <p className="legend">Realize seu cadastro para acompanhar seus casos</p>
             </div>
             <div>
-                <img src={slide3} className={classes.slideCss} />
-                {/* <p className="legend">Legend 3</p> */}
+                {window.screen.width >= '600' ?
+                    <img src={slide3} className={classes.slideCss} />
+                    :
+                    <img src={slide3} className={classes.slideCssMobile} />
+                }
+                <p className="legend">Advocacia Alves Bezerra, sempre em acordo com a lei</p>
             </div>
         </Carousel>
     );
