@@ -14,75 +14,112 @@ import '../App.css';
 import { makeStyles } from '@mui/styles';
 import DefaultImageCard from '../images/insiraImagemAqui.jpg'
 
-const useStyles = makeStyles((theme) => ({
-    media: {
-        height: 10,
-        paddingTop: '56.25%', // 16:9,
-        marginTop: '30'
+const useStyles = makeStyles({
+    card: {
+        minWidth: 275,
+        maxWidth: 345,
+        margin: '20px',
+        transition: '0.3s',
+        '&:hover': {
+            transform: 'scale(1.1)',
+            boxShadow: '0px 0px 15px -5px',
+        },
+    },
+    imageContainer: {
+        textAlign: 'center',
+        margin: '20px 0',
+    },
+    image: {
+        width: '100%',
+        height: 'auto',
+    },
+    bullet: {
+        display: 'inline-block',
+        margin: '0 2px',
+        transform: 'scale(0.8)',
+    },
+    title: {
+        fontSize: 14,
+        textAlign: 'center',
+    },
+    pos: {
+        marginBottom: 12,
+        textAlign: 'center',
+    },
+    titleDivider: {
+        width: '100%',
+        height: 1,
+        margin: '10px 0',
+        borderBottom: '1px solid black',
+    },
+    cardActions: {
+        display: 'flex',
+        justifyContent: 'center',
     }
-}));
+});
+
+function SimpleCard(props) {
+    const classes = useStyles();
+
+    return (
+        <Card className={classes.card}>
+            <CardContent>
+                <div className={classes.imageContainer}>
+                    <img src={props.image} alt="" className={classes.image} />
+                </div>
+                <Typography className={classes.title} variant="h5" component="h2">
+                    {props.title}
+                </Typography>
+                <br />
+                <Typography className={classes.pos} color="textSecondary">
+                    {props.subtitle}
+                </Typography>
+                <div className={classes.titleDivider}></div>
+                <Typography variant="body2" component="p">
+                    {props.description}
+                </Typography>
+            </CardContent>
+            <CardActions className={classes.cardActions}>
+                <Button size="small">{props.buttonText}</Button>
+            </CardActions>
+        </Card>
+    );
+}
 
 
 function ResponsiveCards(props) {
     const classes = useStyles();
-    
+
     const defaultProps = [
         {
             image: DefaultImageCard,
             title: 'Título do card',
             subtitle: 'Subtítulo do card',
             description: [
-              'Aqui vai toda a descrição do card'
+                'Aqui vai toda a descrição do card'
             ],
             buttonText: 'Botão com o tipo outlined',
             buttonVariant: 'outlined',
-          }
+        }
     ];
 
-    let dados = props?.props? props.props : defaultProps;
+    let dados = props?.props ? props.props : defaultProps;
 
     return (
         <>
-
-            <Grid style={{marginTop:'25px'}}>
+            <Grid style={{ marginTop: '25px' }}>
                 <Container component="main">
                     <Grid container spacing={1} alignItems='flex-end'>
                         {
                             dados.map((tier, key) => (
-                                <Grid item key={tier.title} xs={12} sm={12} md={12} lg={4} xl={4} className="card-container">
-                                    <div className="image-container">
-                                        <img src={tier.image} alt='' />
-                                    </div>
-
-                                    <div className='card-content'>
-
-                                        <CardHeader
-                                            title={tier.title}
-                                            sx={{
-                                                backgroundColor: (theme) =>
-                                                    theme.palette.mode === 'light'
-                                                        ? theme.palette.grey[200]
-                                                        : theme.palette.grey[700],
-                                            }}
-                                        />
-
-                                        <Typography color="text.secondary">
-                                            {tier.subtitle}
-                                            <Divider />
-                                        </Typography>
-
-                                        <div className='card-body'>
-                                            {tier.description}
-                                            {/* descricao */}
-                                        </div>
-
-                                    </div>
-                                    <div className='btn'>
-                                        <Button className='btn-button'>
-                                            <a> {tier.buttonText} </a>
-                                        </Button>
-                                    </div>
-                                </Grid>
+                                <SimpleCard
+                                    key={key}
+                                    image={tier.image}
+                                    title={tier.title}
+                                    subtitle={tier.subtitle}
+                                    description={tier.description}
+                                    buttonText={tier.buttonText}
+                                />
                             ))
                         }
                     </Grid>

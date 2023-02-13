@@ -68,8 +68,7 @@
 }
 
 .card-content {
-  margin: 1rem;
-  margin-top: 0.5rem;
+  max-width: 200px;
 }
 
 .h3,
@@ -100,13 +99,6 @@ p {
   background: rgba(27, 156, 252, 0.1);
   transform: scale(1.rem);
 }
-
-/* a {
-  text-transform: uppercase;
-  color: #189cfc;
-  text-decoration: none;
-  font-weight: bold;
-} */
 
 @keyframes App-logo-spin {
   from {

@@ -15,6 +15,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Copyright from '../theme/Copyright';
 import Navbar from '../theme/Navbar';
 import '../../App.css';
+import { useEffect } from 'react';
+import AOS from 'aos';
 
 const theme = createTheme();
 
@@ -24,10 +26,16 @@ export default function SignInSide() {
     const data = new FormData(event.currentTarget);
   };
 
+  useEffect(() => {
+    AOS.init({
+      duration: 2000
+    });
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <Navbar />
-      <Grid container component="main" sx={{ height: '80vh' }}>
+      <Grid data-aos="zoom-in-up" container component="main" sx={{ height: '80vh' }}>
         <CssBaseline />
         <Grid
           item
@@ -109,7 +117,7 @@ export default function SignInSide() {
                 <Grid item xs={12}>
                   <FormControlLabel
                     control={<Checkbox value="allowExtraEmails" color="primary" />}
-                    label="Autorizo receber informações via e-mail"
+                    label="Gostaria de receber informações via e-mail"
                   />
                 </Grid>
               </Grid>
@@ -123,7 +131,7 @@ export default function SignInSide() {
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link href="/login" variant="body2">
+                  <Link style={{ textDecoration: 'none' }} href="/login" variant="body2">
                     Já possui uma conta? Realizar login
                   </Link>
                 </Grid>

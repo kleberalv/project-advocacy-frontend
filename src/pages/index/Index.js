@@ -34,7 +34,8 @@ const tiers = [
     subtitle: 'Sedimentado em uma atuação profissional, inovadora e dinâmica.',
     description: [
       'A organização do escritório está em consonância com os mais modernos modelos de gestão da advocacia internacional, ',
-      'segmentado em bancas de atuação, assim como as grandes firmas, que permite uma excelente atuação.'
+      'segmentado em bancas de atuação, assim como as grandes firmas, que permite uma excelente atuação visando sempre o melhor.',
+      'para o cliente'
     ],
     buttonText: 'Agende uma reunião',
     buttonVariant: 'outlined',
@@ -43,7 +44,7 @@ const tiers = [
     image: QuemSomos2,
     title: 'Pontualidade e seriedade dos compromissos com seus clientes',
     // subheader: 'Most popular',
-    subtitle: 'O atendimento é realizado por até 8 (oito) profissionais capacitados na área de atuação.',
+    subtitle: 'O atendimento é realizado por um profissional capacitado na área.',
     description: [
       'Sendo assim, além dos serviços prestados no contencioso jurídico, prestamos assessoria na ',
       'administração de procedimentos jurídicos abrangendo as áreas preventiva e consultiva.',
@@ -116,7 +117,7 @@ function TelaInicial() {
 
       {/* Início do site */}
 
-      <Grid container style={{ backgroundColor: '#111736', color: '#BC953D' }} data-aos='fade-up' component="main" sx={{ pt: 8, pb: 6 }}>
+      <Grid container style={{ backgroundColor: '#111736', color: '#BC953D', height: '100vh' }} data-aos='fade-up' component="main" sx={{ pt: 8, pb: 6 }}>
         <Grid item xs={12} sm={12}>
           <Typography
             component="h1"
@@ -128,8 +129,6 @@ function TelaInicial() {
             Advocacia Alves Bezerra
           </Typography>
         </Grid>
-
-        <div className="vitrine"></div>
 
         <Grid item align="justify" xs={12} sm={2}>
         </Grid>
@@ -148,104 +147,110 @@ function TelaInicial() {
       </Grid>
 
       {/* Slides */}
-      <div data-aos="fade-up">
+      {/* <div data-aos="fade-up">
         <ResponsiveCarousel />
-      </div>
+      </div> */}
 
       {/* Cards */}
-      <div data-aos="fade-up" data-aos-duration="3000">
-        <div>
-          <ResponsiveCards
-            props={tiers}
-          />
+      <div id='id1'>
+        <div data-aos="fade-up" data-aos-duration="3000">
+          <div>
+            <ResponsiveCards
+              props={tiers}
+            />
+          </div>
         </div>
       </div>
 
       {/* Local */}
       <br></br>
-      <div id='id2' data-aos="fade-up-right">
-        <Grid style={{ backgroundColor: '#E9ECEF', color: '#111736' }}>
-          <Typography
+      <div id='id2'>
+        <div data-aos="fade-up-right">
+          <Grid style={{ backgroundColor: '#E9ECEF', color: '#111736' }}>
+            <Typography
 
-            component="h1"
-            variant="h2"
-            align="center"
-            // color="text.primary"
-            gutterBottom
-          >
-            Como chegar
-          </Typography>
-          <Grid marginTop={2} container spacing={1} style={{ color: '#BC953D' }}>
-            <Grid item xs={12} sm={12} md={12} lg={0.8} xl={0.8} />
+              component="h1"
+              variant="h2"
+              align="center"
+              // color="text.primary"
+              gutterBottom
+            >
+              Como chegar
+            </Typography>
+            <Grid marginTop={2} container spacing={1} style={{ color: '#BC953D' }}>
+              <Grid item xs={12} sm={12} md={12} lg={0.8} xl={0.8} />
 
-            <Grid item xs={12} sm={12} md={12} lg={6} xl={7}>
-              <Paper >
-                <iframe
-                  item
-                  width="100%"
-                  height="450"
-                  id="gmap_canvas"
-                  src="https://maps.google.com/maps?q=CECAD%20-%20Presid%C3%AAncia%20da%20Rep%C3%BAblica&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                  scrolling="no">
-                </iframe>
-              </Paper>
+              <Grid item xs={12} sm={12} md={12} lg={6} xl={7}>
+                <Paper >
+                  <iframe
+                    item
+                    width="100%"
+                    height="450"
+                    id="gmap_canvas"
+                    src="https://maps.google.com/maps?q=CECAD%20-%20Presid%C3%AAncia%20da%20Rep%C3%BAblica&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                    scrolling="no">
+                  </iframe>
+                </Paper>
+              </Grid>
+
+              <Grid item xs={12} sm={12} md={12} lg={5} xl={4}>
+                <Paper >
+                  <Typography variant="h5" component="p" style={{ marginLeft: '20px' }}>
+                    {'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan blandit lectus, non luctus orci bibendum ut. '}
+                    {'Vestibulum laoreet sem id eros sagittis, nec elementum felis finibus. Vestibulum ante ipsum primis in faucibus orci luctus'}
+                    {'et ultrices posuere cubilia curae; Mauris tincidunt at ipsum posuere tincidunt. In ultrices, diam vel dignissim malesuada, '}
+                    {'libero augue pellentesque enim, non venenatis diam tortor ac tellus. Curabitur vitae neque et metus consequat laoreet vitae '}
+                    {'non eros. Aenean pharetra ultrices risus, nec rhoncus enim malesuada non. Nam faucibus risus elementum sem mollis tincidunt. '}
+                    {'Curabitur vitae augue vel tere molestie sed ipsum.'}
+                  </Typography>
+                </Paper>
+              </Grid>
+
+              <div className="vitrine"></div>
             </Grid>
-
-            <Grid item xs={12} sm={12} md={12} lg={5} xl={4}>
-              <Paper >
-                <Typography variant="h5" component="p" style={{ marginLeft: '20px' }}>
-                  {'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan blandit lectus, non luctus orci bibendum ut. '}
-                  {'Vestibulum laoreet sem id eros sagittis, nec elementum felis finibus. Vestibulum ante ipsum primis in faucibus orci luctus'}
-                  {'et ultrices posuere cubilia curae; Mauris tincidunt at ipsum posuere tincidunt. In ultrices, diam vel dignissim malesuada, '}
-                  {'libero augue pellentesque enim, non venenatis diam tortor ac tellus. Curabitur vitae neque et metus consequat laoreet vitae '}
-                  {'non eros. Aenean pharetra ultrices risus, nec rhoncus enim malesuada non. Nam faucibus risus elementum sem mollis tincidunt. '}
-                  {'Curabitur vitae augue vel tere molestie sed ipsum.'}
-                </Typography>
-              </Paper>
-            </Grid>
-
-            <div className="vitrine"></div>
           </Grid>
-        </Grid>
+        </div>
       </div>
 
       {/* Meus trabalhos */}
-      <div id='id3' data-aos="zoom-in-up">
-        <Grid style={{ backgroundColor: '#E9ECEF', color: '#111736' }}>
-          <Typography
+      {/* <div id='id3'>
+        <div data-aos="zoom-in-up">
+          <Grid style={{ backgroundColor: '#E9ECEF', color: '#111736' }}>
+            <Typography
 
-            component="h1"
-            variant="h2"
-            align="center"
-            // color="text.primary"
-            gutterBottom
-          >
-            Meus trabalhos
-          </Typography>
-          <Grid marginTop={2} container spacing={1} style={{ color: '#BC953D' }}>
-            <Grid item xs={12} sm={12} md={12} lg={0.8} xl={0.8} />
+              component="h1"
+              variant="h2"
+              align="center"
+              // color="text.primary"
+              gutterBottom
+            >
+              Meus trabalhos
+            </Typography>
+            <Grid marginTop={2} container spacing={1} style={{ color: '#BC953D' }}>
+              <Grid item xs={12} sm={12} md={12} lg={0.8} xl={0.8} />
 
-            <Grid item xs={12} sm={12} md={12} lg={10.5} xl={10.5}>
-              <Paper >
-                <Typography variant="h5" component="p" style={{ marginLeft: '20px' }}>
-                  {'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan blandit lectus, non luctus orci bibendum ut. '}
-                  {'Vestibulum laoreet sem id eros sagittis, nec elementum felis finibus. Vestibulum ante ipsum primis in faucibus orci luctus'}
-                  {'et ultrices posuere cubilia curae; Mauris tincidunt at ipsum posuere tincidunt. In ultrices, diam vel dignissim malesuada, '}
-                  {'libero augue pellentesque enim, non venenatis diam tortor ac tellus. Curabitur vitae neque et metus consequat laoreet vitae '}
-                  {'non eros. Aenean pharetra ultrices risus, nec rhoncus enim malesuada non. Nam faucibus risus elementum sem mollis tincidunt. '}
-                  {'Curabitur vitae augue vel tere molestie sed ipsum.'}
-                </Typography>
+              <Grid item xs={12} sm={12} md={12} lg={10.5} xl={10.5}>
+                <Paper >
+                  <Typography variant="h5" component="p" style={{ marginLeft: '20px' }}>
+                    {'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan blandit lectus, non luctus orci bibendum ut. '}
+                    {'Vestibulum laoreet sem id eros sagittis, nec elementum felis finibus. Vestibulum ante ipsum primis in faucibus orci luctus'}
+                    {'et ultrices posuere cubilia curae; Mauris tincidunt at ipsum posuere tincidunt. In ultrices, diam vel dignissim malesuada, '}
+                    {'libero augue pellentesque enim, non venenatis diam tortor ac tellus. Curabitur vitae neque et metus consequat laoreet vitae '}
+                    {'non eros. Aenean pharetra ultrices risus, nec rhoncus enim malesuada non. Nam faucibus risus elementum sem mollis tincidunt. '}
+                    {'Curabitur vitae augue vel tere molestie sed ipsum.'}
+                  </Typography>
 
-              </Paper>
+                </Paper>
+              </Grid>
+
+              <Grid item xs={12} sm={12} md={12} lg={0.8} xl={0.8} />
+
+              <div className="vitrine"></div>
+
             </Grid>
-
-            <Grid item xs={12} sm={12} md={12} lg={0.8} xl={0.8} />
-
-            <div className="vitrine"></div>
-
           </Grid>
-        </Grid>
-      </div>
+        </div>
+      </div> */}
 
       {/* Footer */}
       <Container

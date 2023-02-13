@@ -60,9 +60,9 @@ function Navbar() {
                         href="#id2"
                         sx={{ my: 1, mx: 1.5 }}
                     >
-                        Local
+                        Como chegar
                     </Link>
-                    <Link
+                    {/* <Link
                         variant="button"
                         // color="text.secondary"
                         style={{ color: '#FFFFFF', textDecoration: 'none' }}
@@ -70,7 +70,7 @@ function Navbar() {
                         sx={{ my: 1, mx: 1.5 }}
                     >
                         Meus trabalhos
-                    </Link>
+                    </Link> */}
                 </nav>
                 <Button href="/login" style={{ color: '#B08836' }} variant="outlined" sx={{ my: 1, mx: 1.5 }}>
                     Login

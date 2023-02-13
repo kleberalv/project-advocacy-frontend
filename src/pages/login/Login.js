@@ -16,6 +16,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Copyright from '../theme/Copyright';
 import Navbar from '../theme/Navbar';
 import '../../App.css';
+import { useEffect } from 'react';
+import AOS from 'aos';
 
 const theme = createTheme();
 
@@ -25,10 +27,16 @@ export default function SignInSide() {
     const data = new FormData(event.currentTarget);
   };
 
+  useEffect(() => {
+    AOS.init({
+      duration: 2000
+    });
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <Navbar />
-      <Grid container component="main" sx={{ height: '80vh' }}>
+      <Grid data-aos="zoom-in-up" container component="main" sx={{ height: '80vh' }}>
         <CssBaseline />
         <Grid
           item
