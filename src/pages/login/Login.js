@@ -18,6 +18,7 @@ import Navbar from '../theme/Navbar';
 import '../../App.css';
 import { useEffect } from 'react';
 import AOS from 'aos';
+import api from '../../service/api';
 
 const theme = createTheme();
 
@@ -36,7 +37,7 @@ export default function SignInSide() {
   return (
     <ThemeProvider theme={theme}>
       <Navbar />
-      <Grid data-aos="zoom-in-up" container component="main" sx={{ height: '80vh' }}>
+      <Grid data-aos="zoom-in-up" container component="main" sx={{ height: '90vh' }}>
         <CssBaseline />
         <Grid
           item
