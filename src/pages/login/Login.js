@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { useEffect, useState } from "react";
+import Snackbar from '@mui/material/Snackbar';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,23 +17,78 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Copyright from '../theme/Copyright';
 import Navbar from '../theme/Navbar';
 import '../../App.css';
-import { useEffect } from 'react';
 import AOS from 'aos';
 import api from '../../service/api';
 
 const theme = createTheme();
 
 export default function SignInSide() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-  };
 
   useEffect(() => {
     AOS.init({
       duration: 2000
     });
   }, []);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (validateForm()) {
+      try {
+        // Remover caracteres especiais do campo CPF
+        const cpf = formLogin.cpf.replace(/\.|-/g, '');
+
+        const response = await api.post('/login', {
+          cpf,
+          senha: formLogin.senha
+        });
+      } catch (error) {
+        setShowSnackbar(true);
+        setMessagem(error?.response?.data?.error ?? 'Ocorreu um erro ao realizar o Login. Por favor, tente mais tarde.')
+      }
+    }
+  };
+
+  const validateForm = () => {
+    let errors = {};
+    if (!formLogin.cpf) {
+      errors.cpf = "CPF é obrigatório.";
+    }
+    if (!formLogin.senha) {
+      errors.senha = "Senha é obrigatória.";
+    }
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  function formatCPF(value) {
+    // Remove tudo o que não é dígito
+    value = value.replace(/\D/g, '');
+
+    // Adiciona um ponto entre o terceiro e o quarto dígitos
+    value = value.replace(/^(\d{3})(\d)/, '$1.$2');
+
+    // Adiciona um ponto entre o sexto e o sétimo dígitos
+    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+
+    // Adiciona um hífen depois do bloco de quatro dígitos
+    value = value.replace(/(\d{3})(\d)/, '$1-$2');
+
+    // Limita o tamanho máximo do campo em 14 caracteres
+    return value.substr(0, 14);
+  }
+
+  const HandleChangeFormLogin = async (atributo, valor) => {
+    setFormLogin({
+      ...formLogin,
+      [atributo]: valor
+    })
+  }
+
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const [messagem, setMessagem] = useState('');
+  const [formLogin, setFormLogin] = useState({});
+  const [formErrors, setFormErrors] = useState({});
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -75,11 +131,18 @@ export default function SignInSide() {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="E-mail"
-                name="email"
-                autoComplete="email"
+                id="cpf"
+                label="CPF"
+                name="cpf"
+                autoComplete="cpf"
                 autoFocus
+                value={formLogin?.cpf}
+                onChange={(e) =>
+                  HandleChangeFormLogin('cpf', formatCPF(e.target.value))
+                }
+                error={!!formErrors.cpf}
+                helperText={formErrors.cpf}
+                inputProps={{ maxLength: 14 }}
               />
               <TextField
                 margin="normal"
@@ -90,6 +153,10 @@ export default function SignInSide() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={formLogin?.senha}
+                onChange={(e) => HandleChangeFormLogin('senha', e.target.value)}
+                error={!!formErrors.senha}
+                helperText={formErrors.senha}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -103,6 +170,12 @@ export default function SignInSide() {
               >
                 Entrar
               </Button>
+              <Snackbar
+                open={showSnackbar}
+                autoHideDuration={10000}
+                onClose={() => setShowSnackbar(false)}
+                message={messagem}
+              />
               <Grid container>
                 <Grid item xs>
                   <Link style={{ textDecoration: 'none' }} href="#" variant="body2">

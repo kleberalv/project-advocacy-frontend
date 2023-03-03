@@ -117,7 +117,7 @@ function TelaInicial() {
 
       {/* Início do site */}
 
-      <Grid container style={{ backgroundColor: '#111736', color: '#BC953D', height: '100vh' }} data-aos='fade-up' component="main" sx={{ pt: 8, pb: 6 }}>
+      <Grid container style={{ backgroundColor: '#111736', color: '#BC953D', height: '115vh' }} data-aos='fade-up' component="main" sx={{ pt: 8, pb: 6 }}>
         <Grid item xs={12} sm={12}>
           <Typography
             component="h1"
