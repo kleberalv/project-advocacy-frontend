@@ -6,6 +6,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import PrincipalImage from '../../images/Chat.png';
+import { useLocation, useNavigate } from 'react-router-dom';
+import api from '../../service/api';
 
 function Navbar() {
     const useStyles = makeStyles((theme) => ({
@@ -16,6 +18,18 @@ function Navbar() {
         }
     }));
 
+    const { state } = useLocation();
+    const navigate = useNavigate();
+
+    const realizaLogOut = async () => {
+        const response = await api.post('/logout', {
+            token: state?.token
+        });
+        if(response.status === 200){
+            localStorage.removeItem('token');
+            navigate('/login');
+        }
+    }
     return (
         <AppBar
             position="static"
@@ -24,7 +38,7 @@ function Navbar() {
             sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
         >
             <Toolbar style={{ backgroundColor: '#2c2c2c' }} sx={{ flexWrap: 'wrap' }}>
-                <a style={{ marginTop: '8px' }} href="/">
+                <a style={{ marginTop: '8px' }} href={!state?.token? '/':'/home'}>
                     <img style={{ height: '50px' }} src={PrincipalImage} className="image-container" />
                 </a>
                 <Typography
@@ -37,46 +51,54 @@ function Navbar() {
                         variant="h6"
                         // color="text.secondary"
                         style={{ color: '#BC953D', textDecoration: 'none' }}
-                        href="/"
+                        href={!state?.token? '/':'/home'}
                         sx={{ my: 1, mx: 1.5 }}
                     >
                         Advocacia Alves Bezerra
                     </Link>
                 </Typography>
-                <nav>
-                    <Link
-                        variant="button"
-                        // color="text.primary"
-                        style={{ color: '#FFFFFF', textDecoration: 'none' }}
-                        href="#id1"
-                        sx={{ my: 1, mx: 1.5 }}
-                    >
-                        Quem sou
-                    </Link>
-                    <Link
-                        variant="button"
-                        // color="text.secondary"
-                        style={{ color: '#FFFFFF', textDecoration: 'none' }}
-                        href="#id2"
-                        sx={{ my: 1, mx: 1.5 }}
-                    >
-                        Como chegar
-                    </Link>
-                    {/* <Link
-                        variant="button"
-                        // color="text.secondary"
-                        style={{ color: '#FFFFFF', textDecoration: 'none' }}
-                        href="#id3"
-                        sx={{ my: 1, mx: 1.5 }}
-                    >
-                        Meus trabalhos
-                    </Link> */}
-                </nav>
-                <Button href="/login" style={{ color: '#B08836' }} variant="outlined" sx={{ my: 1, mx: 1.5 }}>
-                    Login
-                </Button>
+                {!state?.token ?
+                    <>
+                        <nav>
+                            <Link
+                                variant="button"
+                                // color="text.primary"
+                                style={{ color: '#FFFFFF', textDecoration: 'none' }}
+                                href="#id1"
+                                sx={{ my: 1, mx: 1.5 }}
+                            >
+                                Quem sou
+                            </Link>
+                            <Link
+                                variant="button"
+                                // color="text.secondary"
+                                style={{ color: '#FFFFFF', textDecoration: 'none' }}
+                                href="#id2"
+                                sx={{ my: 1, mx: 1.5 }}
+                            >
+                                Como chegar
+                            </Link>
+                            {/* <Link
+                                variant="button"
+                                // color="text.secondary"
+                                style={{ color: '#FFFFFF', textDecoration: 'none' }}
+                                href="#id3"
+                                sx={{ my: 1, mx: 1.5 }}
+                            >
+                                Meus trabalhos
+                            </Link> */}
+                        </nav>
+                        <Button href="/login" style={{ color: '#B08836' }} variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+                            Login
+                        </Button>
+                    </>
+                    :
+                    <Button onClick={realizaLogOut} style={{ color: '#B08836' }} variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+                        Sair
+                    </Button>
+                }
             </Toolbar>
-        </AppBar>
+        </AppBar >
     )
 }
 

@@ -19,6 +19,8 @@ import Navbar from '../theme/Navbar';
 import '../../App.css';
 import AOS from 'aos';
 import api from '../../service/api';
+import { useNavigate } from 'react-router-dom';
+
 
 const theme = createTheme();
 
@@ -32,6 +34,7 @@ export default function SignInSide() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     if (validateForm()) {
       try {
         // Remover caracteres especiais do campo CPF
@@ -41,6 +44,14 @@ export default function SignInSide() {
           cpf,
           senha: formLogin.senha
         });
+
+        if (response.data.access_token) {
+          const token = response.data.access_token;
+
+          localStorage.setItem('token', token);
+          navigate('/home', { state: { user: response.data.user, token } });
+        }
+
       } catch (error) {
         setShowSnackbar(true);
         setMessagem(error?.response?.data?.error ?? 'Ocorreu um erro ao realizar o Login. Por favor, tente mais tarde.')
@@ -88,12 +99,12 @@ export default function SignInSide() {
   const [messagem, setMessagem] = useState('');
   const [formLogin, setFormLogin] = useState({});
   const [formErrors, setFormErrors] = useState({});
-
+  const navigate = useNavigate();
 
   return (
     <ThemeProvider theme={theme}>
       <Navbar />
-      <Grid data-aos="zoom-in-up" container component="main" sx={{ height: '90vh' }}>
+      <Grid data-aos="zoom-in-up" container component="main" sx={{ height: '92vh' }}>
         <CssBaseline />
         <Grid
           item
@@ -175,6 +186,7 @@ export default function SignInSide() {
                 autoHideDuration={10000}
                 onClose={() => setShowSnackbar(false)}
                 message={messagem}
+                severity="error"
               />
               <Grid container>
                 <Grid item xs>
@@ -182,12 +194,12 @@ export default function SignInSide() {
                     Esqueceu a senha?
                   </Link>
                 </Grid>
-                <Grid item>
+                {/* <Grid item>
                   {'Não possui conta?'}
                   <Link style={{ textDecoration: 'none' }} href="/register" variant="body2">
                     {" Cadastre-se"}
                   </Link>
-                </Grid>
+                </Grid> */}
               </Grid>
               <Grid style={{ marginTop: '50px', marginBottom: '13px' }}>
                 <Copyright />

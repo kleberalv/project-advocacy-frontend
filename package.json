@@ -21,7 +21,7 @@
     "react-native-divider": "^1.0.3",
     "react-redux": "^8.0.2",
     "react-responsive-carousel": "^3.2.23",
-    "react-router-dom": "^6.3.0",
+    "react-router-dom": "^6.8.2",
     "react-scripts": "5.0.1",
     "react-text-mask": "^5.5.0",
     "slice": "^1.0.0",
