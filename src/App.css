@@ -33,6 +33,10 @@
   background-image: url("./images/Slide1.png");
 }
 
+.BackgroundImageIndex {
+  background-image: url("./images/Chat.png");
+}
+
 .vitrine { 
   height: 0px; 
   width: 100%; 
@@ -64,7 +68,7 @@
 
 .image-container {
   overflow: hidden;
-  height: 200px;
+  height: 400px;
 }
 
 .card-content {

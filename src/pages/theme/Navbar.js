@@ -35,7 +35,6 @@ function Navbar() {
             position="static"
             color="default"
             elevation={0}
-            sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
         >
             <Toolbar style={{ backgroundColor: '#2c2c2c' }} sx={{ flexWrap: 'wrap' }}>
                 <a style={{ marginTop: '8px' }} href={!state?.token? '/':'/home'}>

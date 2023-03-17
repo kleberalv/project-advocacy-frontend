@@ -27,6 +27,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const tamanhoTelaAcesso = window.screen.width;
+
 const tiers = [
   {
     image: QuemSomos1,
@@ -117,34 +119,41 @@ function TelaInicial() {
 
       {/* Início do site */}
 
-      <Grid container style={{ backgroundColor: '#111736', color: '#BC953D', height: '115vh' }} data-aos='fade-up' component="main" sx={{ pt: 8, pb: 6 }}>
-        <Grid item xs={12} sm={12}>
-          <Typography
-            component="h1"
-            variant="h2"
-            align="center"
-            // color="text.primary"
-            gutterBottom
-          >
-            Advocacia Alves Bezerra
-          </Typography>
-        </Grid>
+      <Grid container style={{ backgroundColor: '#111736', color: '#BC953D', height: tamanhoTelaAcesso >= 600 ? '93vh' : '74vh' }} data-aos='fade-up' component="main" justifyContent="center">
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          md={7}
+          sx={{
+            backgroundRepeat: 'no-repeat',
+            backgroundColor: (t) =>
+              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+            backgroundSize: tamanhoTelaAcesso >= 600 ? '75%' : '200%',
+            backgroundPosition: 'center',
+            backgroundColor: '#111736'
+          }}
+          className={tamanhoTelaAcesso >= '600' ? 'BackgroundImageIndex' : 'BackgroundImageUsers'}
+        />
 
-        <Grid item align="justify" xs={12} sm={2}>
-        </Grid>
-        <Grid item align="justify" xs={12} sm={5}>
-          <Typography style={{ marginTop: '50px', marginLeft: '25px', marginRight: '25px' }} variant="h5" color="#FFFFFF" component="p">
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          md={5}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          style={{ padding: '0 10px' }}
+        >
+          <Typography variant="h5" color="#FFFFFF" component="p" style={{ textAlign: tamanhoTelaAcesso >= 600 ? false: 'center'}}>
             {'Profissionalismo liberal, graduado em direito e autorizado pelas instituições competentes de cada país a exercer o jus postulandi, ou'}
             {' seja, a representação dos legítimos interesses das pessoas físicas ou jurídicas em juízo ou fora dele, quer entre si, quer ante o Estado.'}
           </Typography>
-        </Grid>
 
-        <Grid item align="center" xs={12} sm={5} style={{ marginTop: '20px' }}>
-          <img src={PrincipalImage} className="image-container" />
         </Grid>
-
-        <div className="vitrine"></div>
       </Grid>
+
 
       {/* Slides */}
       {/* <div data-aos="fade-up">

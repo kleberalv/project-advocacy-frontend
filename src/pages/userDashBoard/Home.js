@@ -19,8 +19,8 @@ function UserDashboard() {
     <ThemeProvider theme={theme}>
       <Navbar />
       <div>
-        <h2>Bem-vindo(a), {state?.user?.nome}!</h2>
-        <p>Você está logado(a) como {state?.user?.email}.</p>
+        <h2>Bem-vindo(a), {state?.user[0]?.nome}!</h2>
+        <p>Você está logado(a) como {state?.user[0]?.email}.</p>
       </div>
     </ThemeProvider>
   );
