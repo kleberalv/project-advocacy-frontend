@@ -8,6 +8,9 @@ function UserDashboard() {
   const theme = createTheme();
   const { state } = useLocation();
   const navigate = useNavigate();
+  const token = state?.token;
+  const user = state?.user[0];
+
 
   useEffect(() => {
     if (!state?.token) {
@@ -16,13 +19,18 @@ function UserDashboard() {
   }, [state, navigate]);
 
   return (
-    <ThemeProvider theme={theme}>
-      <Navbar />
-      <div>
-        <h2>Bem-vindo(a), {state?.user[0]?.nome}!</h2>
-        <p>Você está logado(a) como {state?.user[0]?.email}.</p>
-      </div>
-    </ThemeProvider>
+    <>
+      {token && (
+        <ThemeProvider theme={theme}>
+          <Navbar />
+          <div>
+            <h2>Bem-vindo(a), {user?.nome}!</h2>
+            <p>Você está logado(a) como {user?.email}.</p>
+          </div>
+        </ThemeProvider>
+      )}
+
+    </>
   );
 }
 

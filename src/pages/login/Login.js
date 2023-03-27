@@ -20,7 +20,7 @@ import '../../App.css';
 import AOS from 'aos';
 import api from '../../service/api';
 import { useNavigate } from 'react-router-dom';
-
+import LoadingOverlay from '../../components/LoadingOverlay';
 
 const theme = createTheme();
 
@@ -39,6 +39,7 @@ export default function SignInSide() {
       try {
         // Remover caracteres especiais do campo CPF
         const cpf = formLogin.cpf.replace(/\.|-/g, '');
+        setIsLoading(true);
 
         const response = await api.post('/login', {
           cpf,
@@ -51,10 +52,12 @@ export default function SignInSide() {
           localStorage.setItem('token', token);
           navigate('/home', { state: { user: response.data.user, token } });
         }
+        setIsLoading(false);
 
       } catch (error) {
         setShowSnackbar(true);
-        setMessagem(error?.response?.data?.error ?? 'Ocorreu um erro ao realizar o Login. Por favor, tente mais tarde.')
+        setIsLoading(false);
+        setMessagem((error?.response?.data?.error || error?.response?.data?.errors) ?? 'Ocorreu um erro ao realizar o Login. Por favor, tente mais tarde.')
       }
     }
   };
@@ -100,10 +103,21 @@ export default function SignInSide() {
   const [formLogin, setFormLogin] = useState({});
   const [formErrors, setFormErrors] = useState({});
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <ThemeProvider theme={theme}>
       <Navbar />
+      {isLoading &&
+        <LoadingOverlay />
+      }
+      <Snackbar
+        open={showSnackbar}
+        autoHideDuration={10000}
+        onClose={() => setShowSnackbar(false)}
+        message={messagem}
+        severity="error"
+      />
       <Grid data-aos="zoom-in-up" container component="main" sx={{ height: '92vh' }}>
         <CssBaseline />
         <Grid
@@ -168,6 +182,7 @@ export default function SignInSide() {
                 onChange={(e) => HandleChangeFormLogin('senha', e.target.value)}
                 error={!!formErrors.senha}
                 helperText={formErrors.senha}
+                inputProps={{ maxLength: 20 }}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -181,13 +196,7 @@ export default function SignInSide() {
               >
                 Entrar
               </Button>
-              <Snackbar
-                open={showSnackbar}
-                autoHideDuration={10000}
-                onClose={() => setShowSnackbar(false)}
-                message={messagem}
-                severity="error"
-              />
+
               <Grid container>
                 <Grid item xs>
                   <Link style={{ textDecoration: 'none' }} href="#" variant="body2">
