@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@mui/styles';
 import AppBar from '@mui/material/AppBar';
-import Button from '@mui/material/Button';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
@@ -9,16 +7,11 @@ import PrincipalImage from '../../images/Chat.png';
 import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../../service/api';
 import LoadingOverlay from '../../components/LoadingOverlay';
+import NavbarDefault from '../../components/NavbarDefault';
+import NavbarLogged from '../../components/NavbarLogged';
 import Snackbar from '@mui/material/Snackbar';
 
 function Navbar() {
-    const useStyles = makeStyles((theme) => ({
-        media: {
-            height: 10,
-            paddingTop: '56.25%', // 16:9,
-            marginTop: '30'
-        }
-    }));
 
     const { state } = useLocation();
     const navigate = useNavigate();
@@ -69,13 +62,11 @@ function Navbar() {
                 </a>
                 <Typography
                     variant="h6"
-                    // color="inherit"
                     style={{ marginLeft: '5px', color: '#BC953D' }}
                     noWrap sx={{ flexGrow: 1 }}
                 >
                     <Link
                         variant="h6"
-                        // color="text.secondary"
                         style={{ color: '#BC953D', textDecoration: 'none' }}
                         href={!state?.token ? '/' : '/home'}
                         sx={{ my: 1, mx: 1.5 }}
@@ -84,44 +75,9 @@ function Navbar() {
                     </Link>
                 </Typography>
                 {!state?.token ?
-                    <>
-                        <nav>
-                            <Link
-                                variant="button"
-                                // color="text.primary"
-                                style={{ color: '#FFFFFF', textDecoration: 'none' }}
-                                href="#id1"
-                                sx={{ my: 1, mx: 1.5 }}
-                            >
-                                Quem sou
-                            </Link>
-                            <Link
-                                variant="button"
-                                // color="text.secondary"
-                                style={{ color: '#FFFFFF', textDecoration: 'none' }}
-                                href="#id2"
-                                sx={{ my: 1, mx: 1.5 }}
-                            >
-                                Como chegar
-                            </Link>
-                            {/* <Link
-                                variant="button"
-                                // color="text.secondary"
-                                style={{ color: '#FFFFFF', textDecoration: 'none' }}
-                                href="#id3"
-                                sx={{ my: 1, mx: 1.5 }}
-                            >
-                                Meus trabalhos
-                            </Link> */}
-                        </nav>
-                        <Button href="/login" style={{ color: '#B08836' }} variant="outlined" sx={{ my: 1, mx: 1.5 }}>
-                            Login
-                        </Button>
-                    </>
+                    <NavbarDefault />
                     :
-                    <Button onClick={realizaLogOut} style={{ color: '#B08836' }} variant="outlined" sx={{ my: 1, mx: 1.5 }}>
-                        Sair
-                    </Button>
+                    <NavbarLogged onLogout={realizaLogOut} />
                 }
             </Toolbar>
         </AppBar >
