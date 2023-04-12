@@ -30,16 +30,16 @@ function NavbarDefault() {
           >
             Como chegar
           </Link>
+          <Button
+            href="/login"
+            style={{ color: '#B08836' }}
+            variant="outlined"
+            sx={{ my: 1, mx: 1.5 }}
+          >
+            Login
+          </Button>
         </nav>
       )}
-      <Button
-        href="/login"
-        style={{ color: '#B08836' }}
-        variant="outlined"
-        sx={{ my: 1, mx: 1.5 }}
-      >
-        Login
-      </Button>
     </>
   );
 }

@@ -119,7 +119,7 @@ function TelaInicial() {
 
       {/* Início do site */}
 
-      <Grid container style={{ backgroundColor: '#111736', color: '#BC953D', height: tamanhoTelaAcesso >= 600 ? '93vh' : '74vh' }} data-aos='fade-up' component="main" justifyContent="center">
+      <Grid container style={{ backgroundColor: '#111736', color: '#BC953D', height: tamanhoTelaAcesso >= 600 ? '93vh' : '85vh' }} data-aos='fade-up' component="main" justifyContent="center">
         <Grid
           item
           xs={12}
