@@ -14,18 +14,17 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ResponsiveCards from '../../components/ResponsiveCards';
 import Grid from '@mui/material/Grid';
+import CreateUser from '../userDashBoard/components/CreateUser'
 
 function UserDashboard() {
 
   const theme = createTheme();
-  const { state } = useLocation();
   const navigate = useNavigate();
-  const token = state?.token;
-  const user = state?.user[0];
-  const user_id_perfil = state?.user[0]?.id_perfil;
-  // const user_id_perfil = 2;
+  const token = localStorage.getItem('token');
+  const user = JSON.parse(localStorage.getItem('user'));
+  const user_id_perfil = user.id_perfil;
   const tamanhoTelaAcesso = window.screen.width;
-
+  const [funcionalidade, setFuncionalidade] = useState('');
   const tiers = [];
 
   if (user_id_perfil === 1) {
@@ -38,6 +37,7 @@ function UserDashboard() {
         ],
         buttonText: 'Gerenciar Usuários',
         buttonVariant: 'contained',
+        clique: () => setFuncionalidade(1)
       },
       {
         // image: QuemSomos2,
@@ -93,10 +93,11 @@ function UserDashboard() {
   }
 
   useEffect(() => {
-    if (!state?.token) {
+    if (!token) {
       navigate('/login');
     }
-  }, [state, navigate]);
+  }, []);
+
   const drawerWidth = 240;
 
   const [open, setOpen] = useState(false);
@@ -152,27 +153,34 @@ function UserDashboard() {
                   <MenuIcon />
                 </IconButton>
               </Toolbar>
-              <Box sx={{ flexGrow: 1, mt: 8 }}>
-                <Grid container spacing={2} sx={{ justifyContent: 'center', alignItems: 'stretch', flexWrap: 'wrap' }}>
-                  <Grid item xs={12}>
-                    <Typography variant="h6" align="center">
-                      Bem-vindo(a), {user.nome}!
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Box sx={{ minHeight: 'calc(100vh - 300px)' }}>
-                      <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6} md={12} key={tiers.title}>
-                          <ResponsiveCards props={tiers} />
-                        </Grid>
-                      </Grid>
-                    </Box>
-                  </Grid>
-                </Grid>
-              </Box>
-            </Box>
-          </Box >
 
+              {funcionalidade === '' &&
+                <Box sx={{ flexGrow: 1, mt: 8 }}>
+                  <Grid container spacing={2} sx={{ justifyContent: 'center', alignItems: 'stretch', flexWrap: 'wrap' }}>
+                    <Grid item xs={12}>
+                      <Typography variant="h6" align="center">
+                        Bem-vindo(a), {user?.nome}!
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Box sx={{ minHeight: 'calc(100vh - 300px)' }}>
+                        <Grid container spacing={2}>
+                          <Grid item xs={12} sm={6} md={12} key={tiers.title}>
+                            <ResponsiveCards props={tiers} />
+                          </Grid>
+                        </Grid>
+                      </Box>
+                    </Grid>
+                  </Grid>
+                </Box>
+              }
+
+              {funcionalidade === 1 &&
+                <CreateUser />
+              }
+
+            </Box>
+          </Box>
         </ThemeProvider >
       )
       }

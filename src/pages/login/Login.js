@@ -32,6 +32,16 @@ export default function SignInSide() {
     });
   }, []);
 
+  useEffect(() => {
+    setIsLoading(true);
+    const isLogged = localStorage.getItem('token');
+    if (isLogged) {
+      navigate('/home');
+      setIsLoading(false);
+    }
+    setIsLoading(false);
+  }, []);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -48,9 +58,10 @@ export default function SignInSide() {
 
         if (response.data.access_token) {
           const token = response.data.access_token;
-
+          const user = response.data.user[0];
           localStorage.setItem('token', token);
-          navigate('/home', { state: { user: response.data.user, token } });
+          localStorage.setItem('user', JSON.stringify(user));
+          navigate('/home');
         }
         setIsLoading(false);
 

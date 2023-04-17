@@ -80,7 +80,7 @@ function SimpleCard(props) {
                 </Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
-                <Button size="small">{props.buttonText}</Button>
+                <Button onClick={props.clique} size="small">{props.buttonText}</Button>
             </CardActions>
         </Card>
     );
@@ -100,6 +100,7 @@ function ResponsiveCards(props) {
             ],
             buttonText: 'Botão com o tipo outlined',
             buttonVariant: 'outlined',
+            clique:'#'
         }
     ];
 
@@ -119,6 +120,7 @@ function ResponsiveCards(props) {
                                     subtitle={tier.subtitle}
                                     description={tier.description}
                                     buttonText={tier.buttonText}
+                                    clique={tier.clique}
                                 />
                             ))
                         }

@@ -13,18 +13,18 @@ import Snackbar from '@mui/material/Snackbar';
 
 function Navbar() {
 
-    const { state } = useLocation();
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
     const [showSnackbar, setShowSnackbar] = useState(false);
     const [messagem, setMessagem] = useState('');
+    const token = localStorage.getItem('token');
 
     const realizaLogOut = async () => {
         setIsLoading(true);
 
         try {
             const response = await api.post('/logout', {
-                token: state?.token
+                token: localStorage.getItem('token')
             });
 
             if (response.status === 200) {
@@ -33,9 +33,13 @@ function Navbar() {
                 navigate('/login');
             }
         } catch (error) {
-            setShowSnackbar(true);
             setIsLoading(false);
-            setMessagem((error?.response?.data?.error || error?.response?.data?.errors) ?? 'Ocorreu um erro ao Sair. Tente novamente mais tarde.');
+            setShowSnackbar(true);
+            localStorage.removeItem('token');
+            setTimeout(() => {
+                navigate('/login');
+            }, 5000);
+            setMessagem((error?.response?.data?.error || error?.response?.data?.errors) ?? 'Por favor, realize o login novamente');
         }
     };
 
@@ -57,7 +61,7 @@ function Navbar() {
                 severity="error"
             />
             <Toolbar style={{ backgroundColor: '#2c2c2c' }} sx={{ flexWrap: 'wrap' }}>
-                <a style={{ marginTop: '8px' }} href={!state?.token ? '/' : '/home'}>
+                <a style={{ marginTop: '8px' }} href={!token ? '/' : '/home'}>
                     <img style={{ height: '50px' }} src={PrincipalImage} className="image-container" />
                 </a>
                 <Typography
@@ -68,13 +72,13 @@ function Navbar() {
                     <Link
                         variant="h6"
                         style={{ color: '#BC953D', textDecoration: 'none' }}
-                        href={!state?.token ? '/' : '/home'}
+                        href={!token ? '/' : '/home'}
                         sx={{ my: 1, mx: 1.5 }}
                     >
                         Advocacia Alves Bezerra
                     </Link>
                 </Typography>
-                {!state?.token ?
+                {!token ?
                     <NavbarDefault />
                     :
                     <NavbarLogged onLogout={realizaLogOut} />
