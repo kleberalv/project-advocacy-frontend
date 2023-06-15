@@ -22,7 +22,7 @@ function UserDashboard() {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
   const user = JSON.parse(localStorage.getItem('user'));
-  const user_id_perfil = user.id_perfil;
+  const user_id_perfil = user?.id_perfil;
   const tamanhoTelaAcesso = window.screen.width;
   const [funcionalidade, setFuncionalidade] = useState('');
   const tiers = [];
