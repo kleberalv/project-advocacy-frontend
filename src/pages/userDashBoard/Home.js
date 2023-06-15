@@ -106,10 +106,10 @@ function UserDashboard() {
     <>
       {token && (
         <ThemeProvider theme={theme}>
-          <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+          <Box sx={{ display: 'fixed', flexDirection: 'column', minHeight: '100vh' }}>
             <CssBaseline />
             <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: '#2c2c2c' }}>
-              <Toolbar>
+              <Toolbar style={{ backgroundColor: '#2c2c2c' }}>
                 <IconButton
                   size="large"
                   edge="start"
@@ -148,7 +148,7 @@ function UserDashboard() {
                   aria-label="open drawer"
                   onClick={() => setOpen(true)}
                   edge="start"
-                  sx={{ mr: 2, ...(open && { display: 'none' }) }}
+                  sx={{ mr: 2, ...(open && { display: 'fixed' }) }}
                 >
                   <MenuIcon />
                 </IconButton>

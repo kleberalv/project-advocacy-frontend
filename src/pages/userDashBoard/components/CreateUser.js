@@ -57,7 +57,7 @@ function UserList() {
         }
 
         if (!formValues.id_perfil) {
-            errors.idPerfil = 'Selecione um tipo de perfil.';
+            errors.id_perfil = 'Selecione um tipo de perfil.';
         }
 
         if (!formValues.dat_nasc) {
@@ -424,7 +424,7 @@ function UserList() {
                                 id="tipo-perfil"
                                 value={formValues?.id_perfil}
                                 onChange={(e) => HandleChangeForm('id_perfil', e.target.value)}
-                                error={!!formErrors.idPerfil}
+                                error={!!formErrors.id_perfil}
                             >
                                 <MenuItem value="">Selecione o tipo de perfil</MenuItem>
                                 {idPerfil.map((perfil) => (
