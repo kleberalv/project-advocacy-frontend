@@ -156,7 +156,24 @@ function UserList() {
     };
 
     const handleDeleteUser = (userId) => {
-        // Lógica para excluir o usuário com o ID fornecido
+        const config = {
+            headers: { Authorization: `Bearer ${token}` }
+        };
+        const data = {
+            userId: userId
+        };
+        api.post('/delete', data, config)
+            .then((response) => {
+                setReload(true);
+                setShowModal(false);
+                setShowSnackbar(true);
+                setMessagem(response?.data?.message);
+            })
+            .catch((error) => {
+                setIsLoading(false);
+                setShowSnackbar(true);
+                setMessagem(error.response.data.message);
+            });
     };
 
     const HandleChangeForm = async (atributo, valor) => {
