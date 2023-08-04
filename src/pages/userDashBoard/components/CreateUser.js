@@ -292,7 +292,8 @@ function UserList() {
         <div
             style={{
                 maxWidth: '85%',
-                margin: '0 auto'
+                margin: '0 auto',
+                marginTop: '10px'
             }}
         >
             {isLoading && <LoadingOverlay />}

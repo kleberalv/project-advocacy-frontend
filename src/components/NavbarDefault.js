@@ -8,6 +8,13 @@ function NavbarDefault() {
 
   const location = useLocation();
 
+  const smoothScrollTo = (elementId) => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const isHomePage = location.pathname === '/';
 
   return (
@@ -16,19 +23,19 @@ function NavbarDefault() {
         <nav>
           <Link
             variant="button"
-            style={{ color: '#FFFFFF', textDecoration: 'none' }}
-            href="#id1"
+            style={{ color: '#FFFFFF', textDecoration: 'none', cursor: 'pointer' }}
+            onClick={() => smoothScrollTo('id1')}
             sx={{ my: 1, mx: 1.5 }}
           >
-            Quem sou
+            Áreas de atuação
           </Link>
           <Link
             variant="button"
-            style={{ color: '#FFFFFF', textDecoration: 'none' }}
-            href="#id2"
+            style={{ color: '#FFFFFF', textDecoration: 'none', cursor: 'pointer' }}
+            onClick={() => smoothScrollTo('id2')}
             sx={{ my: 1, mx: 1.5 }}
           >
-            Como chegar
+            Quem sou eu
           </Link>
           <Button
             href="/login"

@@ -18,15 +18,24 @@ import QuemSomos2 from '../../images/QuemSomos2.png';
 import QuemSomos3 from '../../images/QuemSomos3.png';
 import Copyright from '../theme/Copyright';
 import Navbar from '../theme/Navbar'
-import Paper from '@mui/material/Paper';
+import IconButton from '@mui/material/IconButton';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+
 
 const useStyles = makeStyles((theme) => ({
   media: {
     height: 10,
-    paddingTop: '56.25%', // 16:9,
+    paddingTop: '56.25%',
     marginTop: '30'
   }
 }));
+
+const smoothScrollTo = (elementId) => {
+  const element = document.getElementById(elementId);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+};
 
 const tamanhoTelaAcesso = window.screen.width;
 
@@ -115,11 +124,11 @@ function TelaInicial() {
       <Whatsapp />
 
       {/* Menu do sistema */}
-
-      <Navbar />
+      <div id='id0'>
+        <Navbar />
+      </div>
 
       {/* Início do site */}
-
       <Grid
         container
         style={{
@@ -127,7 +136,7 @@ function TelaInicial() {
           color: '#BC953D',
           height: tamanhoTelaAcesso >= 600 ? '93vh' : '85vh'
         }}
-        data-aos='fade-up'
+        data-aos='zoom-in'
         component="main"
         justifyContent="center">
         <Grid
@@ -164,7 +173,6 @@ function TelaInicial() {
         </Grid>
       </Grid>
 
-
       {/* Slides */}
       {/* <div data-aos="fade-up">
         <ResponsiveCarousel />
@@ -172,7 +180,7 @@ function TelaInicial() {
 
       {/* Cards */}
       <div id='id1'>
-        <div data-aos="fade-up" data-aos-duration="3000">
+        <div data-aos="fade-up" >
           <div>
             <ResponsiveCards
               props={tiers}
@@ -181,66 +189,88 @@ function TelaInicial() {
         </div>
       </div>
 
-      <Grid
-        container
-        style={{
-          backgroundColor: '#111736',
-          color: '#BC953D',
-          height: '65vh',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-        data-aos='fade-up'
-        component="main"
-      >
+      {/* Quem sou eu */}
+      <div id='id2'>
         <Grid
-          item
-          xs={12}
-          sm={6}
-          md={6}
-          style={{ padding: '0 10px' }}
+          container
+          style={{
+            marginTop: '30px',
+            backgroundColor: '#111736',
+            color: '#BC953D',
+            height: tamanhoTelaAcesso >= 600 ? '65vh' : '105vh',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          data-aos='fade-up'
+          component="main"
         >
-          <Typography
-            variant="h5"
-            color="#FFFFFF"
-            component="p"
+          <Grid
+            item
+            xs={12}
+            sm={5}
+            md={5}
             style={{
-              textAlign: 'center',
+              padding: '0 20px',
             }}
           >
-            Meu nome é Kleber Alves Bezerra, e sou apaixonado pelo direito e por fazer a diferença na vida das pessoas.
-            Minha trajetória é marcada por uma determinação inabalável e uma busca incansável pelos meus sonhos.
-          </Typography>
-        </Grid>
+            <Typography
+              variant="h5"
+              color="#FFFFFF"
+              component="p"
+              style={{
+              }}
+            >
+              {'Meu nome é Kleber Alves Bezerra, e sou apaixonado pelo direito e por fazer a diferença na vida das pessoas.'}
+              {'Minha trajetória é marcada por uma determinação inabalável e uma busca incansável pelos meus sonhos.'}
+            </Typography>
 
-        <Grid
-          item
-          xs={12}
-          sm={6}
-          md={6}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            backgroundColor: (t) =>
-              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-            borderRadius: '25px',
-            overflow: 'hidden',
-            justifyContent: 'center',
-          }}
-        >
-          <img
-            src={imageAdv}
-            alt="Imagem arredondada"
-            style={{
-              width: '50%',
-              height: '80%',
-              objectFit: 'cover',
-              borderRadius: '25px',
-            }}
+            <Typography
+              variant="h5"
+              color="#FFFFFF"
+              component="p"
+              style={{
+                marginTop: '10px'
+              }}
+            >
+              {'Sou formado pela Universidade Católica de Brasília - UCB e atuo como advogado por volta de 5 anos.'}
+              {'Tenho experiência em diversas áreas do direito, incluindo Civil, Trabalhista, Comercial, Tributário, Família e Administrativo.'}
+            </Typography>
+          </Grid>
+
+          <Grid
+            sm={2}
+            md={2}
           />
-        </Grid>
-      </Grid>
 
+          <Grid
+            item
+            xs={12}
+            sm={4}
+            md={4}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              backgroundColor: (t) =>
+                t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+              borderRadius: '25px',
+              overflow: 'hidden',
+              justifyContent: 'center',
+            }}
+          >
+            <img
+              src={imageAdv}
+              alt="Imagem arredondada"
+              style={{
+                width: '70%',
+                // height: '70%',
+                objectFit: 'cover',
+                borderRadius: '25px',
+                border: '5px solid #BC953D'
+              }}
+            />
+          </Grid>
+        </Grid>
+      </div>
 
       {/* Footer */}
       <Container
@@ -250,9 +280,36 @@ function TelaInicial() {
           borderTop: (theme) => `1px solid ${theme.palette.divider}`,
           mt: 8,
           py: [3, 6],
+          position: 'relative',
+          mb: tamanhoTelaAcesso >= 600 ? '' : '50px',
         }}
       >
-        <Grid container data-aos="fade-down" spacing={4} justifyContent="space-evenly">
+
+        <IconButton
+          className="floating-button"
+          sx={{
+            position: 'absolute',
+            bottom: tamanhoTelaAcesso >= 600 ? '30px' : '70px',
+            right: '30px',
+            zIndex: '999',
+            backgroundColor: '#111736',
+            color: '#FFFFFF',
+            '&:hover': {
+              backgroundColor: '#252e5c',
+            },
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+          }}
+          onClick={() => smoothScrollTo('id0')}
+        >
+          <ArrowUpwardIcon />
+        </IconButton>
+
+        <Grid
+          container
+          data-aos="fade-down"
+          spacing={4}
+          justifyContent="space-evenly"
+        >
           {footers.map((footer) => (
             <Grid item xs={6} sm={3} key={footer.title}>
               <Typography variant="h6" color="text.primary" gutterBottom>

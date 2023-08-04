@@ -7,7 +7,7 @@ function Copyright(props) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
             {'Copyright © Developed by: '}
-            <Link color="inherit" href="https://www.linkedin.com/in/kleberalv/">
+            <Link color="inherit" href="https://www.linkedin.com/in/kleberalv/" target="_blank">
                 Kleber Alves Bezerera Junior
             </Link>
             {' - Sênior Developer '}
