@@ -62,6 +62,7 @@ export default function SignInSide() {
           localStorage.setItem('token', token);
           localStorage.setItem('user', JSON.stringify(user));
           navigate('/home');
+          window.location.reload();
         }
         setIsLoading(false);
 

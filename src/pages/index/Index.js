@@ -12,6 +12,7 @@ import { makeStyles } from '@mui/styles';
 import ResponsiveCards from '../../components/ResponsiveCards';
 import Whatsapp from '../../components/WhatsAppButton';
 import PrincipalImage from '../../images/Chat.png';
+import imageAdv from '../../images/adv.jpg';
 import QuemSomos1 from '../../images/QuemSomos1.png';
 import QuemSomos2 from '../../images/QuemSomos2.png';
 import QuemSomos3 from '../../images/QuemSomos3.png';
@@ -119,7 +120,16 @@ function TelaInicial() {
 
       {/* Início do site */}
 
-      <Grid container style={{ backgroundColor: '#111736', color: '#BC953D', height: tamanhoTelaAcesso >= 600 ? '93vh' : '85vh' }} data-aos='fade-up' component="main" justifyContent="center">
+      <Grid
+        container
+        style={{
+          backgroundColor: '#111736',
+          color: '#BC953D',
+          height: tamanhoTelaAcesso >= 600 ? '93vh' : '85vh'
+        }}
+        data-aos='fade-up'
+        component="main"
+        justifyContent="center">
         <Grid
           item
           xs={12}
@@ -146,7 +156,7 @@ function TelaInicial() {
           justifyContent="center"
           style={{ padding: '0 10px' }}
         >
-          <Typography variant="h5" color="#FFFFFF" component="p" style={{ textAlign: tamanhoTelaAcesso >= 600 ? false: 'center'}}>
+          <Typography variant="h5" color="#FFFFFF" component="p" style={{ textAlign: tamanhoTelaAcesso >= 600 ? false : 'center' }}>
             {'Profissionalismo liberal, graduado em direito e autorizado pelas instituições competentes de cada país a exercer o jus postulandi, ou'}
             {' seja, a representação dos legítimos interesses das pessoas físicas ou jurídicas em juízo ou fora dele, quer entre si, quer ante o Estado.'}
           </Typography>
@@ -171,95 +181,66 @@ function TelaInicial() {
         </div>
       </div>
 
-      {/* Local */}
-      <br></br>
-      <div id='id2'>
-        <div data-aos="fade-up-right">
-          <Grid style={{ backgroundColor: '#E9ECEF', color: '#111736' }}>
-            <Typography
+      <Grid
+        container
+        style={{
+          backgroundColor: '#111736',
+          color: '#BC953D',
+          height: '65vh',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+        data-aos='fade-up'
+        component="main"
+      >
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          md={6}
+          style={{ padding: '0 10px' }}
+        >
+          <Typography
+            variant="h5"
+            color="#FFFFFF"
+            component="p"
+            style={{
+              textAlign: 'center',
+            }}
+          >
+            Meu nome é Kleber Alves Bezerra, e sou apaixonado pelo direito e por fazer a diferença na vida das pessoas.
+            Minha trajetória é marcada por uma determinação inabalável e uma busca incansável pelos meus sonhos.
+          </Typography>
+        </Grid>
 
-              component="h1"
-              variant="h2"
-              align="center"
-              // color="text.primary"
-              gutterBottom
-            >
-              Como chegar
-            </Typography>
-            <Grid marginTop={2} container spacing={1} style={{ color: '#BC953D' }}>
-              <Grid item xs={12} sm={12} md={12} lg={0.8} xl={0.8} />
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          md={6}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            backgroundColor: (t) =>
+              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+            borderRadius: '25px',
+            overflow: 'hidden',
+            justifyContent: 'center',
+          }}
+        >
+          <img
+            src={imageAdv}
+            alt="Imagem arredondada"
+            style={{
+              width: '50%',
+              height: '80%',
+              objectFit: 'cover',
+              borderRadius: '25px',
+            }}
+          />
+        </Grid>
+      </Grid>
 
-              <Grid item xs={12} sm={12} md={12} lg={6} xl={7}>
-                <Paper >
-                  <iframe
-                    item
-                    width="100%"
-                    height="450"
-                    id="gmap_canvas"
-                    src="https://maps.google.com/maps?q=CECAD%20-%20Presid%C3%AAncia%20da%20Rep%C3%BAblica&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                    scrolling="no">
-                  </iframe>
-                </Paper>
-              </Grid>
-
-              <Grid item xs={12} sm={12} md={12} lg={5} xl={4}>
-                <Paper >
-                  <Typography variant="h5" component="p" style={{ marginLeft: '20px' }}>
-                    {'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan blandit lectus, non luctus orci bibendum ut. '}
-                    {'Vestibulum laoreet sem id eros sagittis, nec elementum felis finibus. Vestibulum ante ipsum primis in faucibus orci luctus'}
-                    {'et ultrices posuere cubilia curae; Mauris tincidunt at ipsum posuere tincidunt. In ultrices, diam vel dignissim malesuada, '}
-                    {'libero augue pellentesque enim, non venenatis diam tortor ac tellus. Curabitur vitae neque et metus consequat laoreet vitae '}
-                    {'non eros. Aenean pharetra ultrices risus, nec rhoncus enim malesuada non. Nam faucibus risus elementum sem mollis tincidunt. '}
-                    {'Curabitur vitae augue vel tere molestie sed ipsum.'}
-                  </Typography>
-                </Paper>
-              </Grid>
-
-              <div className="vitrine"></div>
-            </Grid>
-          </Grid>
-        </div>
-      </div>
-
-      {/* Meus trabalhos */}
-      {/* <div id='id3'>
-        <div data-aos="zoom-in-up">
-          <Grid style={{ backgroundColor: '#E9ECEF', color: '#111736' }}>
-            <Typography
-
-              component="h1"
-              variant="h2"
-              align="center"
-              // color="text.primary"
-              gutterBottom
-            >
-              Meus trabalhos
-            </Typography>
-            <Grid marginTop={2} container spacing={1} style={{ color: '#BC953D' }}>
-              <Grid item xs={12} sm={12} md={12} lg={0.8} xl={0.8} />
-
-              <Grid item xs={12} sm={12} md={12} lg={10.5} xl={10.5}>
-                <Paper >
-                  <Typography variant="h5" component="p" style={{ marginLeft: '20px' }}>
-                    {'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan blandit lectus, non luctus orci bibendum ut. '}
-                    {'Vestibulum laoreet sem id eros sagittis, nec elementum felis finibus. Vestibulum ante ipsum primis in faucibus orci luctus'}
-                    {'et ultrices posuere cubilia curae; Mauris tincidunt at ipsum posuere tincidunt. In ultrices, diam vel dignissim malesuada, '}
-                    {'libero augue pellentesque enim, non venenatis diam tortor ac tellus. Curabitur vitae neque et metus consequat laoreet vitae '}
-                    {'non eros. Aenean pharetra ultrices risus, nec rhoncus enim malesuada non. Nam faucibus risus elementum sem mollis tincidunt. '}
-                    {'Curabitur vitae augue vel tere molestie sed ipsum.'}
-                  </Typography>
-
-                </Paper>
-              </Grid>
-
-              <Grid item xs={12} sm={12} md={12} lg={0.8} xl={0.8} />
-
-              <div className="vitrine"></div>
-
-            </Grid>
-          </Grid>
-        </div>
-      </div> */}
 
       {/* Footer */}
       <Container

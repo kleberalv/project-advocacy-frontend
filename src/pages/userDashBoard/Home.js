@@ -14,7 +14,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ResponsiveCards from '../../components/ResponsiveCards';
 import Grid from '@mui/material/Grid';
-import CreateUser from '../userDashBoard/components/CreateUser'
+import CreateUser from '../userDashBoard/components/CreateUser';
+import AcomProcessos from '../../../src/images/AcompProcesso.jpg';
+import GerencPlataforma from '../../../src/images/GerencPlataforma.jpg';
+import GerencUsuarios from '../../../src/images/GerencUsuarios.jpg';
+import Paper from '@mui/material/Paper';
 
 function UserDashboard() {
 
@@ -30,7 +34,7 @@ function UserDashboard() {
   if (user_id_perfil === 1) {
     tiers.push(
       {
-        // image: QuemSomos1,
+        image: GerencUsuarios,
         subtitle: 'Gerenciamento dos Usuários',
         description: [
           'Siga para o gerenciamento dos usuários. Crie, edite ou inative o usuário desejável.',
@@ -40,7 +44,7 @@ function UserDashboard() {
         clique: () => setFuncionalidade(1)
       },
       {
-        // image: QuemSomos2,
+        image: GerencPlataforma,
         subtitle: 'Configurações da Plataforma',
         description: [
           'Configure o site da forma desejada. Altere as imagens da página principal, textos e etc.',
@@ -49,7 +53,7 @@ function UserDashboard() {
         buttonVariant: 'contained',
       },
       {
-        // image: QuemSomos3,
+        image: AcomProcessos,
         subtitle: 'Acompanhe os Processos',
         description: [
           'Clique e acompanhe o andamento dos processos cadastrados.',

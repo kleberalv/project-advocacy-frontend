@@ -40,6 +40,8 @@ function UserList() {
     const [formErrors, setFormErrors] = useState({});
     const [reload, setReload] = useState({});
     const [idPerfil, setIdPerfil] = useState([]);
+    const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+    const [userIdToDelete, setUserIdToDelete] = useState(null);
 
     const validateForm = () => {
         let errors = {};
@@ -138,6 +140,16 @@ function UserList() {
         setShowModal(false);
     };
 
+    const handleOpenConfirmationModal = (userId) => {
+        setUserIdToDelete(userId);
+        setShowConfirmationModal(true);
+    };
+
+    const handleCloseConfirmationModal = () => {
+        setShowConfirmationModal(false);
+        setUserIdToDelete(null);
+    };
+
     const handleEditUser = (userId) => {
         const user = sortedUsers.find((user) => user.id_usuario === userId);
 
@@ -155,20 +167,22 @@ function UserList() {
         }
     };
 
-    const handleDeleteUser = (userId) => {
+    const handleDeleteUser = () => {
         setIsLoading(true);
         const config = {
             headers: { Authorization: `Bearer ${token}` }
         };
         const data = {
-            userId: userId
+            userId: userIdToDelete
         };
         api.post('/delete', data, config)
             .then((response) => {
                 setReload(true);
                 setShowModal(false);
+                setShowConfirmationModal(false);
                 setShowSnackbar(true);
                 setMessagem(response?.data?.message);
+                setIsLoading(false);
             })
             .catch((error) => {
                 setIsLoading(false);
@@ -275,7 +289,12 @@ function UserList() {
     };
 
     return (
-        <div>
+        <div
+            style={{
+                maxWidth: '85%',
+                margin: '0 auto'
+            }}
+        >
             {isLoading && <LoadingOverlay />}
             <Snackbar
                 open={showSnackbar}
@@ -339,7 +358,7 @@ function UserList() {
                                     <Button onClick={() => handleEditUser(user.id_usuario)} style={{ color: '#007bff' }}>
                                         <Edit />
                                     </Button>
-                                    <Button onClick={() => handleDeleteUser(user.id_usuario)} style={{ color: '#dc3545' }}>
+                                    <Button onClick={() => handleOpenConfirmationModal(user.id_usuario)} style={{ color: '#dc3545' }}>
                                         <Delete />
                                     </Button>
 
@@ -475,6 +494,41 @@ function UserList() {
                     </form>
                 </div>
             </Modal>
+
+            <Modal
+                open={showConfirmationModal}
+                onClose={handleCloseConfirmationModal}
+            >
+                <div
+                    style={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        width: 400,
+                        backgroundColor: 'white',
+                        boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+                        padding: '20px',
+                        borderRadius: '4px',
+                    }}
+                >
+                    <Typography variant="h6" component="h2">
+                        Confirmar Exclusão
+                    </Typography>
+                    <Typography variant="body1" component="p" style={{ marginTop: '20px' }}>
+                        Tem certeza que deseja excluir este usuário?
+                    </Typography>
+                    <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'flex-end' }}>
+                        <Button variant="outlined" onClick={handleCloseConfirmationModal} style={{ marginRight: '10px' }}>
+                            Cancelar
+                        </Button>
+                        <Button variant="contained" color="primary" onClick={handleDeleteUser}>
+                            Excluir
+                        </Button>
+                    </div>
+                </div>
+            </Modal>
+
 
         </div>
     );

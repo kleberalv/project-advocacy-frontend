@@ -3,7 +3,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-import PrincipalImage from '../../images/Chat.png';
+import PrincipalImage from '../../images/icon.png';
 import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../../service/api';
 import LoadingOverlay from '../../components/LoadingOverlay';
@@ -62,7 +62,15 @@ function Navbar() {
             />
             <Toolbar style={{ backgroundColor: '#2c2c2c' }} sx={{ flexWrap: 'wrap' }}>
                 <a style={{ marginTop: '8px' }} href={!token ? '/' : '/home'}>
-                    <img style={{ height: '50px' }} src={PrincipalImage} className="image-container" />
+                    <img
+                        style={{
+                            height: '50px',
+                            borderRadius: '25px'
+                        }}
+                        src={PrincipalImage}
+                        className="image-container"
+                        alt="Imagem arredondada"
+                    />
                 </a>
                 <Typography
                     variant="h6"
