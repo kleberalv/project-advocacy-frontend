@@ -38,7 +38,7 @@ function UserList() {
     const [messagem, setMessagem] = useState('');
     const [showModal, setShowModal] = useState(false);
     const [formErrors, setFormErrors] = useState({});
-    const [reload, setReload] = useState({});
+    const [reload, setReload] = useState(false);
     const [idPerfil, setIdPerfil] = useState([]);
     const [showConfirmationModal, setShowConfirmationModal] = useState(false);
     const [userIdToDelete, setUserIdToDelete] = useState(null);
@@ -226,10 +226,11 @@ function UserList() {
             headers: { Authorization: `Bearer ${token}` }
         };
 
-        api.post("/allUsers", null, config)
+        api.get("/allUsers", config)
             .then((response) => {
                 setUsers(response.data.users);
                 setIsLoading(false);
+                setReload(false);
             })
             .catch((error) => {
                 setIsLoading(false);
@@ -250,7 +251,7 @@ function UserList() {
             headers: { Authorization: `Bearer ${token}` }
         };
 
-        api.get("/tiposPerfil", null, config)
+        api.get("/tiposPerfil", config)
             .then((response) => {
                 setIdPerfil(response.data);
             })
