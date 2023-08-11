@@ -173,7 +173,7 @@ function UserList() {
             headers: { Authorization: `Bearer ${token}` }
         };
         const data = {
-            userId: userIdToDelete
+            id: userIdToDelete
         };
         api.post('/delete', data, config)
             .then((response) => {
@@ -226,7 +226,7 @@ function UserList() {
             headers: { Authorization: `Bearer ${token}` }
         };
 
-        api.get("/allUsers", config)
+        api.get("/index", config)
             .then((response) => {
                 setUsers(response.data.users);
                 setIsLoading(false);
@@ -251,7 +251,7 @@ function UserList() {
             headers: { Authorization: `Bearer ${token}` }
         };
 
-        api.get("/tiposPerfil", config)
+        api.get("/profiles", config)
             .then((response) => {
                 setIdPerfil(response.data);
             })
@@ -274,7 +274,7 @@ function UserList() {
             const config = {
                 headers: { Authorization: `Bearer ${token}` }
             };
-            api.post(formValues?.id ? '/update' : '/register', formValues, config)
+            api.post(formValues?.id ? '/update' : '/store', formValues, config)
                 .then((response) => {
                     setReload(true);
                     setShowModal(false);
