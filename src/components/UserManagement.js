@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import api from '../../../service/api';
+import api from '../service/api';
 import {
     Table,
     TableHead,
@@ -22,11 +22,11 @@ import {
 } from '@mui/material';
 import { TableSortLabel } from '@material-ui/core';
 import { Edit, Delete } from '@material-ui/icons';
-import LoadingOverlay from '../../../components/LoadingOverlay';
-import { useLocation, useNavigate } from 'react-router-dom';
+import LoadingOverlay from './LoadingOverlay';
+import {useNavigate } from 'react-router-dom';
 import Snackbar from '@mui/material/Snackbar';
 
-function UserList() {
+function UserManagement() {
     const [users, setUsers] = useState([]);
     const [orderBy, setOrderBy] = useState('nome');
     const [order, setOrder] = useState('asc');
@@ -191,7 +191,7 @@ function UserList() {
             });
     };
 
-    const HandleChangeForm = async (atributo, valor) => {
+    const HandleChangeForm = (atributo, valor) => {
         setFormValues({
             ...formValues,
             [atributo]: valor
@@ -243,7 +243,7 @@ function UserList() {
                     }, 5000);
                 }
             });
-    }, [reload]);
+    }, [reload, navigate, token]);
 
     useEffect(() => {
         setIsLoading(true);
@@ -266,7 +266,7 @@ function UserList() {
                     }, 5000);
                 }
             });
-    }, []);
+    }, [navigate, token]);
 
     const handleSaveUser = () => {
         if (validateForm()) {
@@ -460,6 +460,7 @@ function UserList() {
                             <InputLabel id="tipo-perfil-label">Tipo de Perfil</InputLabel>
                             <Select
                                 labelId="tipo-perfil-label"
+                                onMouseDown={(e) => e.preventDefault()}
                                 id="tipo-perfil"
                                 value={formValues?.id_perfil}
                                 onChange={(e) => HandleChangeForm('id_perfil', e.target.value)}
@@ -536,4 +537,4 @@ function UserList() {
     );
 }
 
-export default UserList;
+export default UserManagement;

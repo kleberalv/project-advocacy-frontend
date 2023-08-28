@@ -4,7 +4,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import PrincipalImage from '../../images/icon.png';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import api from '../../service/api';
 import LoadingOverlay from '../../components/LoadingOverlay';
 import NavbarDefault from '../../components/NavbarDefault';

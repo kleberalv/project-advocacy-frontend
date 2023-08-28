@@ -12,10 +12,6 @@ import '../../App.css';
 const theme = createTheme();
 
 export default function SignInSide() {
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-    };
 
     return (
         <ThemeProvider theme={theme}>
@@ -29,9 +25,6 @@ export default function SignInSide() {
                     md={7}
                     sx={{
                         // backgroundImage: 'url(https://source.unsplash.com/random)',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundColor: (t) =>
-                            t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                     }}
@@ -52,7 +45,7 @@ export default function SignInSide() {
                         <Typography variant="h1" color="inherit" className="font-medium mb-16">
                             404
                         </Typography>
-                        <Box component="form" style={{ textAlign: 'center' }} noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                        <Box component="form" style={{ textAlign: 'center' }} noValidate sx={{ mt: 3 }}>
                             <Typography variant="h5" color="textSecondary" className="mb-16">
                                 A página solicitada não foi encontrada.
                             </Typography>

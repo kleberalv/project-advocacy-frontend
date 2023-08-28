@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Navbar from '../theme/Navbar';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import AppBar from '@mui/material/AppBar';
@@ -14,13 +14,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ResponsiveCards from '../../components/ResponsiveCards';
 import Grid from '@mui/material/Grid';
-import CreateUser from '../userDashBoard/components/CreateUser';
-import AcomProcessos from '../../../src/images/AcompProcesso.jpg';
-import GerencPlataforma from '../../../src/images/GerencPlataforma.jpg';
-import GerencUsuarios from '../../../src/images/GerencUsuarios.jpg';
-import Paper from '@mui/material/Paper';
+import UserManagement from '../../components/UserManagement';
+import { getTiersBasedOnUserProfile } from '../../components/Constants';
 
-function UserDashboard() {
+function Dashboard() {
 
   const theme = createTheme();
   const navigate = useNavigate();
@@ -29,78 +26,13 @@ function UserDashboard() {
   const user_id_perfil = user?.id_perfil;
   const tamanhoTelaAcesso = window.screen.width;
   const [funcionalidade, setFuncionalidade] = useState('');
-  const tiers = [];
-
-  if (user_id_perfil === 1) {
-    tiers.push(
-      {
-        image: GerencUsuarios,
-        subtitle: 'Gerenciamento dos Usuários',
-        description: [
-          'Siga para o gerenciamento dos usuários. Crie, edite ou inative o usuário desejável.',
-        ],
-        buttonText: 'Gerenciar Usuários',
-        buttonVariant: 'contained',
-        clique: () => setFuncionalidade(1)
-      },
-      {
-        image: GerencPlataforma,
-        subtitle: 'Configurações da Plataforma',
-        description: [
-          'Configure o site da forma desejada. Altere as imagens da página principal, textos e etc.',
-        ],
-        buttonText: 'Configurar Plataforma',
-        buttonVariant: 'contained',
-      },
-      {
-        image: AcomProcessos,
-        subtitle: 'Acompanhe os Processos',
-        description: [
-          'Clique e acompanhe o andamento dos processos cadastrados.',
-        ],
-        buttonText: 'Andamento Processuais',
-        buttonVariant: 'outlined',
-      }
-    );
-  }
-
-  if (user_id_perfil === 2) {
-    tiers.push(
-      {
-        // image: QuemSomos3,
-        subtitle: 'Acompanhe os Processos',
-        description: [
-          'Clique e acompanhe o andamento dos processos cadastrados.',
-        ],
-        buttonText: 'Andamento Processuais',
-        buttonVariant: 'outlined',
-      },
-      {
-        // image: QuemSomos4,
-        subtitle: 'Alterar Perfil',
-        description: [
-          'Altere e mantenha seus dados atualizados na plataforma.',
-        ],
-        buttonText: 'Alterar Perfil',
-        buttonVariant: 'outlined',
-      },
-      {
-        // image: QuemSomos4,
-        subtitle: 'Solicitar Reunião',
-        description: [
-          'Solicite reunião com o advogado para retirar dúvidas',
-        ],
-        buttonText: 'Agendar Reunião',
-        buttonVariant: 'outlined',
-      }
-    );
-  }
+  const tiers = getTiersBasedOnUserProfile(user_id_perfil, setFuncionalidade);
 
   useEffect(() => {
     if (!token) {
       navigate('/login');
     }
-  }, []);
+  }, [navigate, token]);
 
   const drawerWidth = 240;
 
@@ -180,7 +112,7 @@ function UserDashboard() {
               }
 
               {funcionalidade === 1 &&
-                <CreateUser />
+                <UserManagement />
               }
 
             </Box>
@@ -193,4 +125,4 @@ function UserDashboard() {
 
 }
 
-export default UserDashboard;
+export default Dashboard;

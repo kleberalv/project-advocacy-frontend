@@ -1,11 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardHeader from '@mui/material/CardHeader';
-import StarIcon from '@mui/icons-material/StarBorder';
-import Divider from '@mui/material/Divider';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -88,7 +84,6 @@ function SimpleCard(props) {
 
 
 function ResponsiveCards(props) {
-    const classes = useStyles();
 
     const defaultProps = [
         {

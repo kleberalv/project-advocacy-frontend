@@ -7,28 +7,14 @@ import Link from '@mui/material/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
 import AOS from 'aos';
-import ResponsiveCarousel from '../../components/ResponsiveCarousel'
-import { makeStyles } from '@mui/styles';
 import ResponsiveCards from '../../components/ResponsiveCards';
 import Whatsapp from '../../components/WhatsAppButton';
-import PrincipalImage from '../../images/Chat.png';
 import imageAdv from '../../images/adv.jpg';
-import QuemSomos1 from '../../images/QuemSomos1.png';
-import QuemSomos2 from '../../images/QuemSomos2.png';
-import QuemSomos3 from '../../images/QuemSomos3.png';
+import { tiers, footers } from '../../components/Constants';
 import Copyright from '../theme/Copyright';
 import Navbar from '../theme/Navbar'
 import IconButton from '@mui/material/IconButton';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-
-
-const useStyles = makeStyles((theme) => ({
-  media: {
-    height: 10,
-    paddingTop: '56.25%',
-    marginTop: '30'
-  }
-}));
 
 const smoothScrollTo = (elementId) => {
   const element = document.getElementById(elementId);
@@ -39,70 +25,6 @@ const smoothScrollTo = (elementId) => {
 
 const tamanhoTelaAcesso = window.screen.width;
 
-const tiers = [
-  {
-    image: QuemSomos1,
-    title: 'Uma filosofia moderna de gestão juntamente com a tecnologia',
-    subtitle: 'Sedimentado em uma atuação profissional, inovadora e dinâmica.',
-    description: [
-      'A organização do escritório está em consonância com os mais modernos modelos de gestão da advocacia internacional, ',
-      'segmentado em bancas de atuação, assim como as grandes firmas, que permite uma excelente atuação visando sempre o melhor.',
-      'para o cliente'
-    ],
-    buttonText: 'Agende uma reunião',
-    buttonVariant: 'outlined',
-  },
-  {
-    image: QuemSomos2,
-    title: 'Pontualidade e seriedade dos compromissos com seus clientes',
-    // subheader: 'Most popular',
-    subtitle: 'O atendimento é realizado por um profissional capacitado na área.',
-    description: [
-      'Sendo assim, além dos serviços prestados no contencioso jurídico, prestamos assessoria na ',
-      'administração de procedimentos jurídicos abrangendo as áreas preventiva e consultiva.',
-      'Agende uma reunião com nossa equipe jurídica.',
-    ],
-    buttonText: 'Agende uma reunião',
-    buttonVariant: 'contained',
-  },
-  {
-    image: QuemSomos3,
-    title: 'Agregar valores aos negócios por meio do conjunto de informações',
-    subtitle: 'Acompanhamento processual eficiente e diferenciado',
-    description: [
-      'Nosso objetivo é agregar valores aos negócios dos clientes por meio do conjunto de informações fundamentais que',
-      'obtemos por um acompanhamento processual eficiente e diferenciado, de modo a prestar todo o suporte legal necessário.',
-    ],
-    buttonText: 'Agende uma reunião',
-    buttonVariant: 'outlined',
-  },
-];
-
-const footers = [
-  {
-    title: 'Company',
-    description: ['Team', 'History', 'Contact us', 'Locations'],
-  },
-  {
-    title: 'Features',
-    description: [
-      'Cool stuff',
-      'Random feature',
-      'Team feature',
-      'Developer stuff',
-      'Another one',
-    ],
-  },
-  {
-    title: 'Resources',
-    description: ['Resource', 'Resource name', 'Another resource', 'Final resource'],
-  },
-  {
-    title: 'Legal',
-    description: ['Privacy policy', 'Terms of use'],
-  },
-];
-
 function TelaInicial() {
 
   useEffect(() => {
@@ -110,8 +32,6 @@ function TelaInicial() {
       duration: 2000
     });
   }, []);
-
-  const classes = useStyles();
 
   return (
 
@@ -146,8 +66,6 @@ function TelaInicial() {
           md={7}
           sx={{
             backgroundRepeat: 'no-repeat',
-            backgroundColor: (t) =>
-              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
             backgroundSize: tamanhoTelaAcesso >= 600 ? '75%' : '200%',
             backgroundPosition: 'center',
             backgroundColor: '#111736'
@@ -250,8 +168,6 @@ function TelaInicial() {
             style={{
               display: 'flex',
               alignItems: 'center',
-              backgroundColor: (t) =>
-                t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
               borderRadius: '25px',
               overflow: 'hidden',
               justifyContent: 'center',

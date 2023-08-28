@@ -1,10 +1,9 @@
 import React from "react";
-import { Routes, Route, Switch } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Index from './pages/index/Index'
 import Login from './pages/login/Login'
-import Home from './pages/userDashBoard/Home'
+import Home from './pages/dashboard/Home'
 import NotFound from './pages/theme/NotFound'
-import Register from './pages/register/Register'
 
 function RoutesApp() {
     return (
