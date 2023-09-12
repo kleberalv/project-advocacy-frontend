@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import api from '../service/api';
 import {
     Table,
@@ -23,7 +23,7 @@ import {
 import { TableSortLabel } from '@material-ui/core';
 import { Edit, Delete } from '@material-ui/icons';
 import LoadingOverlay from './LoadingOverlay';
-import {useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Snackbar from '@mui/material/Snackbar';
 
 function UserManagement() {
@@ -38,7 +38,7 @@ function UserManagement() {
     const [messagem, setMessagem] = useState('');
     const [showModal, setShowModal] = useState(false);
     const [formErrors, setFormErrors] = useState({});
-    const [reload, setReload] = useState(false);
+    const [reload, setReload] = useState(true);
     const [idPerfil, setIdPerfil] = useState([]);
     const [showConfirmationModal, setShowConfirmationModal] = useState(false);
     const [userIdToDelete, setUserIdToDelete] = useState(null);
@@ -167,30 +167,6 @@ function UserManagement() {
         }
     };
 
-    const handleDeleteUser = () => {
-        setIsLoading(true);
-        const config = {
-            headers: { Authorization: `Bearer ${token}` }
-        };
-        const data = {
-            id: userIdToDelete
-        };
-        api.post('/delete', data, config)
-            .then((response) => {
-                setReload(true);
-                setShowModal(false);
-                setShowConfirmationModal(false);
-                setShowSnackbar(true);
-                setMessagem(response?.data?.message);
-                setIsLoading(false);
-            })
-            .catch((error) => {
-                setIsLoading(false);
-                setShowSnackbar(true);
-                setMessagem(error.response.data.message);
-            });
-    };
-
     const HandleChangeForm = (atributo, valor) => {
         setFormValues({
             ...formValues,
@@ -220,53 +196,51 @@ function UserManagement() {
         }
     });
 
-    useEffect(() => {
-        setIsLoading(true);
-        const config = {
-            headers: { Authorization: `Bearer ${token}` }
-        };
-
-        api.get("/index", config)
-            .then((response) => {
-                setUsers(response.data.users);
-                setIsLoading(false);
-                setReload(false);
-            })
-            .catch((error) => {
-                setIsLoading(false);
-                if (error.response.status === 500) {
-                    setShowSnackbar(true);
-                    setMessagem(error.response.data.message);
-                    localStorage.removeItem('token');
-                    setTimeout(() => {
-                        navigate('/login');
-                    }, 5000);
-                }
-            });
-    }, [reload, navigate, token]);
+    const handleError = useCallback((error) => {
+        setIsLoading(false);
+        setShowSnackbar(true);
+        setMessagem(error?.response?.data?.message);
+        if (error.response.status === 500) {
+            localStorage.removeItem('token');
+            setTimeout(() => {
+                navigate('/login');
+            }, 5000);
+        }
+    }, [navigate]);
 
     useEffect(() => {
-        setIsLoading(true);
-        const config = {
-            headers: { Authorization: `Bearer ${token}` }
-        };
+        if (reload) {
+            setReload(false);
+            setIsLoading(true);
+            const config = {
+                headers: { Authorization: `Bearer ${token}` }
+            };
+            api.get("/index", config)
+                .then((response) => {
+                    setUsers(response.data.users);
+                    setIsLoading(false);
+                })
+                .catch((error) => {
+                    handleError(error);
+                });
+        }
+    }, [reload, navigate, token, handleError]);
 
-        api.get("/profiles", config)
-            .then((response) => {
-                setIdPerfil(response.data);
-            })
-            .catch((error) => {
-                setIsLoading(false);
-                if (error.response.status === 500) {
-                    setShowSnackbar(true);
-                    setMessagem(error.response.data.message);
-                    localStorage.removeItem('token');
-                    setTimeout(() => {
-                        navigate('/login');
-                    }, 5000);
-                }
-            });
-    }, [navigate, token]);
+    useEffect(() => {
+        if (reload) {
+            setIsLoading(true);
+            const config = {
+                headers: { Authorization: `Bearer ${token}` }
+            };
+            api.get("/profiles", config)
+                .then((response) => {
+                    setIdPerfil(response.data);
+                })
+                .catch((error) => {
+                    handleError(error);
+                });
+        }
+    }, [reload, navigate, token, handleError]);
 
     const handleSaveUser = () => {
         if (validateForm()) {
@@ -282,11 +256,31 @@ function UserManagement() {
                     setMessagem(response?.data?.message);
                 })
                 .catch((error) => {
-                    setIsLoading(false);
-                    setShowSnackbar(true);
-                    setMessagem(error.response.data.message);
+                    handleError(error);
                 });
         }
+    };
+
+    const handleDeleteUser = () => {
+        setIsLoading(true);
+        const config = {
+            headers: { Authorization: `Bearer ${token}` }
+        };
+        const data = {
+            id: userIdToDelete
+        };
+        api.post('/delete', data, config)
+            .then((response) => {
+                setReload(true);
+                setShowModal(false);
+                setShowConfirmationModal(false);
+                setShowSnackbar(true);
+                setMessagem(response?.data?.message);
+                setIsLoading(false);
+            })
+            .catch((error) => {
+                handleError(error);
+            });
     };
 
     return (
@@ -304,6 +298,7 @@ function UserManagement() {
                 onClose={() => setShowSnackbar(false)}
                 message={messagem}
                 severity="error"
+                style={{ zIndex: 9999 }}
             />
             <Grid container alignItems="center" justifyContent="space-between">
                 <Grid item>
@@ -415,7 +410,6 @@ function UserManagement() {
                             label="CPF"
                             name="cpf"
                             autoComplete="cpf"
-                            autoFocus
                             value={reFormatCPF(formValues?.cpf)}
                             onChange={(e) => HandleChangeForm('cpf', formatCPF(e.target.value))}
                             error={!!formErrors.cpf}
@@ -431,7 +425,6 @@ function UserManagement() {
                             label="E-mail"
                             name="email"
                             autoComplete="email"
-                            autoFocus
                             value={formValues?.email}
                             onChange={(e) => HandleChangeForm('email', e.target.value)}
                             error={!!formErrors.email}
