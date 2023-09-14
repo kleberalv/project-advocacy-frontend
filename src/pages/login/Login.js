@@ -76,7 +76,7 @@ export default function SignInSide() {
       } catch (error) {
         setShowSnackbar(true);
         setIsLoading(false);
-        setMessagem(error?.response?.data?.message ?? 'Ocorreu um erro ao realizar o Login. Por favor, tente mais tarde.')
+        setMessagem((error?.response?.data?.message||error?.response?.data?.errors) ?? 'Ocorreu um erro ao realizar o Login. Por favor, tente mais tarde.')
       }
     }
   };

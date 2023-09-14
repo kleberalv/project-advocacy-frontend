@@ -199,8 +199,8 @@ function UserManagement() {
     const handleError = useCallback((error) => {
         setIsLoading(false);
         setShowSnackbar(true);
-        setMessagem(error?.response?.data?.message);
-        if (error.response.status === 500) {
+        setMessagem((error?.response?.data?.message || error?.response?.data?.errors) || 'Ocorreu um erro ao realizar a ação');
+        if (error?.response?.status === 500) {
             localStorage.removeItem('token');
             setTimeout(() => {
                 navigate('/login');
@@ -215,7 +215,7 @@ function UserManagement() {
             const config = {
                 headers: { Authorization: `Bearer ${token}` }
             };
-            api.get("/index", config)
+            api.get("/users", config)
                 .then((response) => {
                     setUsers(response.data.users);
                     setIsLoading(false);
@@ -248,7 +248,9 @@ function UserManagement() {
             const config = {
                 headers: { Authorization: `Bearer ${token}` }
             };
-            api.post(formValues?.id ? '/update' : '/store', formValues, config)
+            const requestMethod = formValues?.id ? 'put' : 'post';
+            const apiUrl = requestMethod === 'put' ? `/users/${formValues.id}` : '/users';
+            api[requestMethod](apiUrl, formValues, config)
                 .then((response) => {
                     setReload(true);
                     setShowModal(false);
@@ -264,12 +266,10 @@ function UserManagement() {
     const handleDeleteUser = () => {
         setIsLoading(true);
         const config = {
-            headers: { Authorization: `Bearer ${token}` }
+            headers: { Authorization: `Bearer ${token}` },
+            data: { id: userIdToDelete }
         };
-        const data = {
-            id: userIdToDelete
-        };
-        api.post('/delete', data, config)
+        api.delete(`/users/${userIdToDelete}`, config)
             .then((response) => {
                 setReload(true);
                 setShowModal(false);
