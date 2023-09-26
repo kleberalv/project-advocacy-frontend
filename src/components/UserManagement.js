@@ -13,6 +13,7 @@ import {
     Modal,
     Typography,
     TextField,
+    InputAdornment
 } from '@material-ui/core';
 import {
     Select,
@@ -25,6 +26,7 @@ import { Edit, Delete } from '@material-ui/icons';
 import LoadingOverlay from './LoadingOverlay';
 import { useNavigate } from 'react-router-dom';
 import Snackbar from '@mui/material/Snackbar';
+import SearchIcon from '@material-ui/icons/Search';
 
 function UserManagement() {
     const [users, setUsers] = useState([]);
@@ -42,6 +44,7 @@ function UserManagement() {
     const [idPerfil, setIdPerfil] = useState([]);
     const [showConfirmationModal, setShowConfirmationModal] = useState(false);
     const [userIdToDelete, setUserIdToDelete] = useState(null);
+    const [searchTerm, setSearchTerm] = useState('');
 
     const validateForm = () => {
         let errors = {};
@@ -119,7 +122,7 @@ function UserManagement() {
     const handleOpenModal = (userId) => {
         if (userId) {
             // Editar usuário existente
-            const user = sortedUsers.find((user) => user.id_usuario === userId);
+            const user = sortedAndFilteredUsers.find((user) => user.id_usuario === userId);
             setFormValues(user);
         } else {
             // Novo usuário
@@ -151,7 +154,7 @@ function UserManagement() {
     };
 
     const handleEditUser = (userId) => {
-        const user = sortedUsers.find((user) => user.id_usuario === userId);
+        const user = sortedAndFilteredUsers.find((user) => user.id_usuario === userId);
 
         if (user) {
             setFormValues({
@@ -183,18 +186,24 @@ function UserManagement() {
         }
     };
 
-    const sortedUsers = users.sort((a, b) => {
-        const isAsc = order === 'asc';
-        if (orderBy === 'nome') {
-            return (a.nome.localeCompare(b.nome)) * (isAsc ? 1 : -1);
-        } else if (orderBy === 'cpf') {
-            return (a.cpf.localeCompare(b.cpf)) * (isAsc ? 1 : -1);
-        } else if (orderBy === 'email') {
-            return (a.email.localeCompare(b.email)) * (isAsc ? 1 : -1);
-        } else {
-            return 0;
-        }
-    });
+    const sortedAndFilteredUsers = users
+        .filter((user) =>
+            user.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            user.cpf.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            user.email.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+        .sort((a, b) => {
+            const isAsc = order === 'asc';
+            if (orderBy === 'nome') {
+                return a.nome.localeCompare(b.nome) * (isAsc ? 1 : -1);
+            } else if (orderBy === 'cpf') {
+                return a.cpf.localeCompare(b.cpf) * (isAsc ? 1 : -1);
+            } else if (orderBy === 'email') {
+                return a.email.localeCompare(b.email) * (isAsc ? 1 : -1);
+            } else {
+                return 0;
+            }
+        });
 
     const handleError = useCallback((error) => {
         setIsLoading(false);
@@ -303,6 +312,19 @@ function UserManagement() {
             <Grid container alignItems="center" justifyContent="space-between">
                 <Grid item>
                     <h1>Lista de usuários</h1>
+                    <TextField
+                        label="Pesquisar"
+                        variant="outlined"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <SearchIcon />
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
                 </Grid>
                 <Grid item>
                     <Button variant="contained" color="primary" onClick={() => handleOpenModal()}>
@@ -310,7 +332,7 @@ function UserManagement() {
                     </Button>
                 </Grid>
             </Grid>
-            <TableContainer component={Paper} className="custom-table">
+            <TableContainer style={{ marginTop: '10px' }} component={Paper} className="custom-table">
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -345,7 +367,7 @@ function UserManagement() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {sortedUsers.map((user) => (
+                        {sortedAndFilteredUsers.map((user) => (
                             <TableRow key={user.id_usuario}>
                                 <TableCell>{user.nome}</TableCell>
                                 <TableCell>{formatCPF(user.cpf)}</TableCell>

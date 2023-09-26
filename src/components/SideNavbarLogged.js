@@ -11,23 +11,28 @@ import HandshakeIcon from '@mui/icons-material/Handshake';
 import List from '@mui/material/List';
 
 function SideNavbarLogged(props) {
+
+    const handleItemClick = (value) => {
+        props.setFuncionalidade(value);
+    };
+
     return (
         <List sx={{ overflow: 'auto' }}>
             {props?.user_id_perfil === 1 ? (
                 <>
-                    <ListItemButton>
+                    <ListItemButton onClick={() => handleItemClick(1)}>
                         <ListItemIcon>
                             <ManageAccountsIcon />
                         </ListItemIcon>
                         <ListItemText primary="Administrar Usuários" />
                     </ListItemButton>
-                    <ListItemButton>
+                    <ListItemButton onClick={() => handleItemClick(2)}>
                         <ListItemIcon>
                             <SettingsIcon />
                         </ListItemIcon>
                         <ListItemText primary="Configurações da plataforma" />
                     </ListItemButton>
-                    <ListItemButton>
+                    <ListItemButton onClick={() => handleItemClick(3)}>
                         <ListItemIcon>
                             <GavelIcon />
                         </ListItemIcon>
@@ -37,19 +42,19 @@ function SideNavbarLogged(props) {
                 </>
             ) : (
                 <>
-                    <ListItemButton>
+                    <ListItemButton onClick={() => handleItemClick(3)}>
                         <ListItemIcon>
                             <GavelIcon />
                         </ListItemIcon>
                         <ListItemText primary="Acompanhamento dos processos" />
                     </ListItemButton>
-                    <ListItemButton>
+                    <ListItemButton onClick={() => handleItemClick(4)}>
                         <ListItemIcon>
                             <AccountCircleIcon />
                         </ListItemIcon>
                         <ListItemText primary="Alterar Perfil" />
                     </ListItemButton>
-                    <ListItemButton>
+                    <ListItemButton onClick={() => handleItemClick(5)}>
                         <ListItemIcon>
                             <HandshakeIcon />
                         </ListItemIcon>

@@ -90,6 +90,7 @@ export const getTiersBasedOnUserProfile = (user_id_perfil, setFuncionalidade) =>
         ],
         buttonText: 'Configurar Plataforma',
         buttonVariant: 'contained',
+        clique: () => setFuncionalidade(2)
       },
       {
         image: AcomProcessos,
@@ -99,6 +100,7 @@ export const getTiersBasedOnUserProfile = (user_id_perfil, setFuncionalidade) =>
         ],
         buttonText: 'Andamento Processuais',
         buttonVariant: 'outlined',
+        clique: () => setFuncionalidade(3)
       }
     ];
   }
@@ -113,6 +115,7 @@ export const getTiersBasedOnUserProfile = (user_id_perfil, setFuncionalidade) =>
         ],
         buttonText: 'Andamento Processuais',
         buttonVariant: 'outlined',
+        clique: () => setFuncionalidade(3)
       },
       {
         // image: QuemSomos4,
@@ -122,6 +125,7 @@ export const getTiersBasedOnUserProfile = (user_id_perfil, setFuncionalidade) =>
         ],
         buttonText: 'Alterar Perfil',
         buttonVariant: 'outlined',
+        clique: () => setFuncionalidade(4)
       },
       {
         // image: QuemSomos4,
@@ -131,6 +135,7 @@ export const getTiersBasedOnUserProfile = (user_id_perfil, setFuncionalidade) =>
         ],
         buttonText: 'Agendar Reunião',
         buttonVariant: 'outlined',
+        clique: () => setFuncionalidade(5)
       }
     ];
   }

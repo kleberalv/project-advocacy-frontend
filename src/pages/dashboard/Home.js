@@ -15,6 +15,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ResponsiveCards from '../../components/ResponsiveCards';
 import Grid from '@mui/material/Grid';
 import UserManagement from '../../components/UserManagement';
+import ProcessManagement from '../../components/ProcessManagement';
 import { getTiersBasedOnUserProfile } from '../../components/Constants';
 
 function Dashboard() {
@@ -33,6 +34,12 @@ function Dashboard() {
       navigate('/login');
     }
   }, [navigate, token]);
+
+  useEffect(() => {
+    if (funcionalidade !== '') {
+      setOpen(false);
+    }
+  }, [funcionalidade]);
 
   const drawerWidth = 240;
 
@@ -72,23 +79,12 @@ function Dashboard() {
               <Toolbar />
 
               <Box sx={{ overflow: 'auto', marginTop: tamanhoTelaAcesso <= 600 && '64px' }}>
-                <SideNavbarLogged user_id_perfil={user_id_perfil} />
+                <SideNavbarLogged user_id_perfil={user_id_perfil} setFuncionalidade={setFuncionalidade} />
               </Box>
 
             </Drawer>
 
-            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-              <Toolbar>
-                <IconButton
-                  color="inherit"
-                  aria-label="open drawer"
-                  onClick={() => setOpen(true)}
-                  edge="start"
-                  sx={{ mr: 2, ...(open && { display: 'fixed' }) }}
-                >
-                  <MenuIcon />
-                </IconButton>
-              </Toolbar>
+            <Box component="main" sx={{ flexGrow: 1, p: 3, mt: 10 }}>
 
               {funcionalidade === '' &&
                 <Box sx={{ flexGrow: 1, mt: 8 }}>
@@ -113,6 +109,31 @@ function Dashboard() {
 
               {funcionalidade === 1 &&
                 <UserManagement />
+              }
+
+              {funcionalidade === 2 &&
+                <>
+                  {alert('Em desenvolvimento')}
+                  {setFuncionalidade('')}
+                </>
+              }
+
+              {funcionalidade === 3 &&
+                <ProcessManagement />
+              }
+
+              {funcionalidade === 4 &&
+                <>
+                  {alert('Em desenvolvimento')}
+                  {setFuncionalidade('')}
+                </>
+              }
+
+              {funcionalidade === 5 &&
+                <>
+                  {alert('Em desenvolvimento')}
+                  {setFuncionalidade('')}
+                </>
               }
 
             </Box>
