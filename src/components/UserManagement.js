@@ -276,7 +276,7 @@ function UserManagement() {
         setIsLoading(true);
         const config = {
             headers: { Authorization: `Bearer ${token}` },
-            data: { id: userIdToDelete }
+            data: { id_usuario: userIdToDelete }
         };
         api.delete(`/users/${userIdToDelete}`, config)
             .then((response) => {

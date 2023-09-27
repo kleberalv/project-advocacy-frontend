@@ -172,7 +172,9 @@ function ProcessManagement() {
                             <TableCell>
                                 Observação
                             </TableCell>
-                            <TableCell>Ações</TableCell>
+                            {/* <TableCell>
+                                Ações
+                            </TableCell> */}
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -188,10 +190,8 @@ function ProcessManagement() {
                                         setShowObservationModal(true);
                                     }}>Leia mais</Typography>
                                 </TableCell>
-
-                                <TableCell>
-                                    {/* Adicione as ações para os processos, se necessário */}
-                                </TableCell>
+                                {/* <TableCell>
+                                </TableCell> */}
                             </TableRow>
                         ))}
                     </TableBody>

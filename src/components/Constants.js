@@ -4,6 +4,8 @@ import QuemSomos3 from '../images/QuemSomos3.png';
 import AcomProcessos from '../../src/images/AcompProcesso.jpg';
 import GerencPlataforma from '../../src/images/GerencPlataforma.jpg';
 import GerencUsuarios from '../../src/images/GerencUsuarios.jpg';
+import SolicitarReuniao from '../../src/images/SolicitarReuniao.jpg';
+import AlterarPerfil from '../../src/images/AlterarPerfil.jpg';
 
 export const tiers = [
   {
@@ -105,10 +107,10 @@ export const getTiersBasedOnUserProfile = (user_id_perfil, setFuncionalidade) =>
     ];
   }
 
-  if (user_id_perfil === 2) {
+  if (user_id_perfil === 2 || user_id_perfil === 3) {
     return [
       {
-        // image: QuemSomos3,
+        image: AcomProcessos,
         subtitle: 'Acompanhe os Processos',
         description: [
           'Clique e acompanhe o andamento dos processos cadastrados.',
@@ -118,7 +120,7 @@ export const getTiersBasedOnUserProfile = (user_id_perfil, setFuncionalidade) =>
         clique: () => setFuncionalidade(3)
       },
       {
-        // image: QuemSomos4,
+        image: AlterarPerfil,
         subtitle: 'Alterar Perfil',
         description: [
           'Altere e mantenha seus dados atualizados na plataforma.',
@@ -128,7 +130,7 @@ export const getTiersBasedOnUserProfile = (user_id_perfil, setFuncionalidade) =>
         clique: () => setFuncionalidade(4)
       },
       {
-        // image: QuemSomos4,
+        image: SolicitarReuniao,
         subtitle: 'Solicitar Reunião',
         description: [
           'Solicite reunião com o advogado para retirar dúvidas',
