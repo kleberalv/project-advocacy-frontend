@@ -86,7 +86,7 @@ function ProcessManagement() {
             };
             api.get("/process", config)
                 .then((response) => {
-                    setProcessos(response.data.processos);
+                    setProcessos(response.data.process);
                     setIsLoading(false);
                 })
                 .catch((error) => {

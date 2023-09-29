@@ -243,7 +243,7 @@ function UserManagement() {
             };
             api.get("/profiles", config)
                 .then((response) => {
-                    setIdPerfil(response.data);
+                    setIdPerfil(response.data.profiles);
                 })
                 .catch((error) => {
                     handleError(error);
