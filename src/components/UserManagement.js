@@ -119,23 +119,16 @@ function UserManagement() {
         return '';
     };
 
-    const handleOpenModal = (userId) => {
-        if (userId) {
-            // Editar usuário existente
-            const user = sortedAndFilteredUsers.find((user) => user.id_usuario === userId);
-            setFormValues(user);
-        } else {
-            // Novo usuário
-            setFormValues({
-                id: '',
-                nome: '',
-                cpf: '',
-                email: '',
-                dat_nasc: '',
-                id_perfil: '',
-                endereco: '',
-            });
-        }
+    const handleOpenModal = () => {
+        setFormValues({
+            id: '',
+            nome: '',
+            cpf: '',
+            email: '',
+            dat_nasc: '',
+            id_perfil: '',
+            endereco: '',
+        });
         setShowModal(true);
     };
 
@@ -209,7 +202,7 @@ function UserManagement() {
         setIsLoading(false);
         setShowSnackbar(true);
         setMessagem((error?.response?.data?.message || error?.response?.data?.errors) || 'Ocorreu um erro ao realizar a ação');
-        if (error?.response?.status === 500) {
+        if (error?.response?.status === 500 || error?.response?.status === 401) {
             localStorage.removeItem('token');
             setTimeout(() => {
                 navigate('/login');
@@ -546,7 +539,6 @@ function UserManagement() {
                     </div>
                 </div>
             </Modal>
-
 
         </div>
     );
