@@ -4,6 +4,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
 import GavelIcon from '@mui/icons-material/Gavel';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -37,6 +38,12 @@ function SideNavbarLogged(props) {
                             <GavelIcon />
                         </ListItemIcon>
                         <ListItemText primary="Acompanhamento dos processos" />
+                    </ListItemButton>
+                    <ListItemButton onClick={() => handleItemClick(4)}>
+                        <ListItemIcon>
+                            <PersonIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Alterar perfil" />
                     </ListItemButton>
                     <Divider />
                 </>

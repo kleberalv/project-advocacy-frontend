@@ -417,6 +417,9 @@ function ProcessManagement() {
                         borderRadius: '4px',
                     }}
                 >
+                    <Typography variant="h6" component="h2">
+                        {!formValues?.id_processo ? 'Criar novo processo' : 'Editar processo'}
+                    </Typography>
                     <form>
                         <TextField
                             margin="normal"

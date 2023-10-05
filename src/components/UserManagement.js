@@ -42,6 +42,7 @@ function UserManagement() {
     const [formErrors, setFormErrors] = useState({});
     const [reload, setReload] = useState(true);
     const [idPerfil, setIdPerfil] = useState([]);
+    const [idSexo, setIdSexo] = useState([]);
     const [showConfirmationModal, setShowConfirmationModal] = useState(false);
     const [userIdToDelete, setUserIdToDelete] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
@@ -63,6 +64,10 @@ function UserManagement() {
 
         if (!formValues.id_perfil) {
             errors.id_perfil = 'Selecione um tipo de perfil.';
+        }
+
+        if (!formValues.id_sexo) {
+            errors.id_sexo = 'Selecione o sexo';
         }
 
         if (!formValues.dat_nasc) {
@@ -127,6 +132,7 @@ function UserManagement() {
             email: '',
             dat_nasc: '',
             id_perfil: '',
+            id_sexo: '',
             endereco: '',
         });
         setShowModal(true);
@@ -157,6 +163,7 @@ function UserManagement() {
                 email: user.email,
                 dat_nasc: user.dat_nasc,
                 id_perfil: user.id_perfil,
+                id_sexo: user.id_sexo,
                 endereco: user.endereco,
             });
             setShowModal(true);
@@ -237,6 +244,22 @@ function UserManagement() {
             api.get("/profiles", config)
                 .then((response) => {
                     setIdPerfil(response.data.profiles);
+                })
+                .catch((error) => {
+                    handleError(error);
+                });
+        }
+    }, [reload, navigate, token, handleError]);
+
+    useEffect(() => {
+        if (reload) {
+            setIsLoading(true);
+            const config = {
+                headers: { Authorization: `Bearer ${token}` }
+            };
+            api.get("/sexos", config)
+                .then((response) => {
+                    setIdSexo(response.data.sexos);
                 })
                 .catch((error) => {
                     handleError(error);
@@ -416,6 +439,24 @@ function UserManagement() {
                             helperText={formErrors.nome}
                             inputProps={{ maxLength: 40 }}
                         />
+                        <FormControl style={{ marginTop: '10px' }} fullWidth>
+                            <InputLabel id="tipo-sexo-label">Sexo</InputLabel>
+                            <Select
+                                labelId="tipo-sexo-label"
+                                onMouseDown={(e) => e.preventDefault()}
+                                id="tipo-sexo"
+                                value={formValues?.id_sexo}
+                                onChange={(e) => HandleChangeForm('id_sexo', e.target.value)}
+                                error={!!formErrors.id_sexo}
+                            >
+                                <MenuItem value="">Selecione o sexo</MenuItem>
+                                {idSexo.map((sexo) => (
+                                    <MenuItem key={sexo.id_sexo} value={sexo.id_sexo}>
+                                        {sexo.nome_sexo}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
                         <TextField
                             margin="normal"
                             required
@@ -481,7 +522,6 @@ function UserManagement() {
                                     </MenuItem>
                                 ))}
                             </Select>
-
                         </FormControl>
 
                         <TextField

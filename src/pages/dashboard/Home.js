@@ -16,6 +16,7 @@ import ResponsiveCards from '../../components/ResponsiveCards';
 import Grid from '@mui/material/Grid';
 import UserManagement from '../../components/UserManagement';
 import ProcessManagement from '../../components/ProcessManagement';
+import ProfileManagement from '../../components/ProfileManagement';
 import { getTiersBasedOnUserProfile } from '../../components/Constants';
 
 function Dashboard() {
@@ -124,8 +125,7 @@ function Dashboard() {
 
               {funcionalidade === 4 &&
                 <>
-                  {alert('Em desenvolvimento')}
-                  {setFuncionalidade('')}
+                  <ProfileManagement />
                 </>
               }
 
