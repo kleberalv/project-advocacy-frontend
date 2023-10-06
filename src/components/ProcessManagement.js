@@ -163,7 +163,7 @@ function ProcessManagement() {
         }
     }, [navigate]);
 
-    useEffect(() => {
+    const fetchUserProfile = useCallback(() => {
         try {
             const user = localStorage.getItem('user');
             const userProfile = JSON.parse(user);
@@ -181,71 +181,71 @@ function ProcessManagement() {
         }
     }, [navigate]);
 
-    useEffect(() => {
-        if (reload) {
-            setReload(false);
-            setIsLoading(true);
-            const config = {
-                headers: { Authorization: `Bearer ${token}` }
-            };
-            api.get("/process", config)
-                .then((response) => {
-                    setProcessos(response.data.process);
-                    setIsLoading(false);
-                })
-                .catch((error) => {
-                    handleError(error);
-                });
-        }
-    }, [reload, navigate, token, handleError]);
+    const fetchProcesses = useCallback(() => {
+        setIsLoading(true);
+        const config = {
+            headers: { Authorization: `Bearer ${token}` }
+        };
+        api.get("/process", config)
+            .then((response) => {
+                setProcessos(response.data.process);
+                setIsLoading(false);
+            })
+            .catch((error) => {
+                handleError(error);
+            });
+    }, [token, handleError]);
+
+    const fetchLawyers = useCallback(() => {
+        const config = {
+            headers: { Authorization: `Bearer ${token}` }
+        };
+        api.get("/lawyer", config)
+            .then((response) => {
+                setLawyers(response.data.lawyer);
+            })
+            .catch((error) => {
+                handleError(error);
+            });
+    }, [token, handleError]);
+
+    const fetchClients = useCallback(() => {
+        const config = {
+            headers: { Authorization: `Bearer ${token}` }
+        };
+        api.get("/client", config)
+            .then((response) => {
+                setClients(response.data.client);
+            })
+            .catch((error) => {
+                handleError(error);
+            });
+    }, [token, handleError]);
+
+    const fetchStatus = useCallback(() => {
+        const config = {
+            headers: { Authorization: `Bearer ${token}` }
+        };
+        api.get("/status", config)
+            .then((response) => {
+                setStatusProcess(response.data.status);
+            })
+            .catch((error) => {
+                handleError(error);
+            });
+    }, [token, handleError]);
 
     useEffect(() => {
-        if (reload) {
-            setReload(false);
-            const config = {
-                headers: { Authorization: `Bearer ${token}` }
-            };
-            api.get("/lawyer", config)
-                .then((response) => {
-                    setLawyers(response.data.lawyer);
-                })
-                .catch((error) => {
-                    handleError(error);
-                });
+        fetchUserProfile();
+        if (userProfile === 1 || userProfile === 2) {
+            fetchProcesses();
+            fetchLawyers();
+            fetchClients();
+            fetchStatus();
+        } else if (userProfile === 3) {
+            fetchProcesses();
         }
-    }, [reload, navigate, token, handleError]);
-
-    useEffect(() => {
-        if (reload) {
-            setReload(false);
-            const config = {
-                headers: { Authorization: `Bearer ${token}` }
-            };
-            api.get("/client", config)
-                .then((response) => {
-                    setClients(response.data.client);
-                })
-                .catch((error) => {
-                    handleError(error);
-                });
-        }
-    }, [reload, navigate, token, handleError]);
-
-    useEffect(() => {
-        if (reload) {
-            setReload(false);
-            const config = {
-                headers: { Authorization: `Bearer ${token}` }
-            };
-            api.get("/status", config)
-                .then((response) => {
-                    setStatusProcess(response.data.status);
-                })
-                .catch((error) => {
-                    handleError(error);
-                });
-        }
-    }, [reload, navigate, token, handleError]);
+    }, [userProfile, fetchUserProfile, fetchProcesses, fetchLawyers, fetchClients, fetchStatus, reload]);
 
     const handleSaveProcess = () => {
         if (validateForm()) {
@@ -257,7 +257,7 @@ function ProcessManagement() {
             const apiUrl = requestMethod === 'put' ? `/process/${formValues.id_processo}` : '/process';
             api[requestMethod](apiUrl, formValues, config)
                 .then((response) => {
-                    setReload(true);
+                    setReload((prev) => !prev);
                     setShowModal(false);
                     setShowSnackbar(true);
                     setMessagem(response?.data?.message);
@@ -276,7 +276,7 @@ function ProcessManagement() {
         };
         api.delete(`/process/${processIdToDelete}`, config)
             .then((response) => {
-                setReload(true);
+                setReload((prev) => !prev);
                 setShowModal(false);
                 setShowConfirmationModal(false);
                 setShowSnackbar(true);

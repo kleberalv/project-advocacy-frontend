@@ -161,11 +161,13 @@ function ProfileManagement() {
                 headers: { Authorization: `Bearer ${token}` },
                 id: formValues.id
             };
-            api.put(`/updateProfile`, formValuesToSend, config)
+            api.put(`/updateMe`, formValuesToSend, config)
                 .then((response) => {
                     setReload(true);
                     setShowSnackbar(true);
                     setMessagem(response?.data?.message);
+                    HandleChangeForm('senha', '');
+                    HandleChangeForm('confirmarSenha', '');
                     setIsLoading(false);
                 })
                 .catch((error) => {
